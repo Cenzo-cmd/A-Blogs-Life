@@ -12,3 +12,5 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
+
+.DS_Store
