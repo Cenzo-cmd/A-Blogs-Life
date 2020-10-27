@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m4">
+
+                <!-- This is "profile" card, which displays user information -->
+                <div class="card">
+                    <div class="card-content">
+                        <p>This is a very simple card. It can contain user profile information. It would be easy to add
+                            an image if header/profile-img if we wanted. Tabs below could toggle between user
+                            information.</p>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-tabs">
+                        <ul class="tabs tabs-fixed-width">
+                            <li class="tab"><a href="#test4">Test 1</a></li>
+                            <li class="tab"><a class="active" href="#test5">Test 2</a></li>
+                            <li class="tab"><a href="#test6">Test 3</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-content grey lighten-4">
+                        <div id="test4">Test 1</div>
+                        <div id="test5">Test 2</div>
+                        <div id="test6">Test 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m8">
+                <!-- The dashboard card. TODO: Add handlerbars functionality for #each post (once that information is established) -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://placeimg.com/640/480/any">
+                        <span class="card-title">Card Title</span>
+                    </div>
+                    <div class="card-content">
+                        <p>This is a very simple card, which displays the type of post a blogger can make. We will need
+                            to use handlebars functions to communicate with the post methods</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
