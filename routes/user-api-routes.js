@@ -7,7 +7,7 @@ module.exports = (app) => {
     response.json(request.user);
   });
 
-  // Create user
+  ////////// C - Create - Create a new User
   app.post("/api/signup", (request, response) => {
     const { email, password, firstName, lastName } = request.body;
     db.User.create({
@@ -24,6 +24,11 @@ module.exports = (app) => {
       });
   });
 
+  ////////// R - Read - Get one or all  Users
+
+  //TODO:////////// U - Update - Change user information? Profile? Or is this login?
+
+  ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
   app.delete("/profile/:id", (request, response) => {
     console.log(request.params);
