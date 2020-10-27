@@ -1,15 +1,22 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = async(app) => {
-    try {
-        await app.post("/api/login", (request, response) => {
+module.exports = (app) => {
+    app.post("/api/login", passport.authenticate("local"), (request, response) => {
+        response.json(request.user);
+    });
 
-            response.json(request);
-        })
-
-    } catch (error) {
-        if (error) console.error(error.message);
-    }
+    app.post("/api/signup", (request, response) => {
+        db.User.create({
+                email: request.body.email,
+                password: request.body.password
+            })
+            .then(() => {
+                response.redirect(307, "/api/login");
+            })
+            .catch(err => {
+                response.status(401).json(err);
+            });
+    });
 
 }
