@@ -26,7 +26,34 @@ module.exports = (app) => {
 
   ////////// R - Read - Get one or all  Users
 
-  //TODO:////////// U - Update - Change user information? Profile? Or is this login?
+  //Get ALL Users AND their associated BlogPosts
+  app.get("/api/users", (request, response) => {
+    // "include" in findAll will join,
+    //  equivalent of  SELECT * FROM Users LEFT OUTER JOIN BlogPosts ON Users.id = BlogPosts.user_id;
+    db.User.findAll({
+      //FIXME: This line won't work until associations are added to User/BlogPost models
+      //  include: [db.BlogPost],
+    }).then(function (dbUser) {
+      response.json(dbUser);
+    });
+  });
+
+  //Get ONE User AND their associated BlogPosts
+  app.get("/api/users/:id", (request, response) => {
+    // "include" in findOne will join,
+    // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
+    db.Author.findOne({
+      where: {
+        id: request.params.id,
+      },
+      //FIXME: This line won't work until associations are added to User/BlogPost models
+      //   include: [db.Post],
+    }).then(function (dbAuthor) {
+      response.json(dbAuthor);
+    });
+  });
+
+  ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
 
   ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
