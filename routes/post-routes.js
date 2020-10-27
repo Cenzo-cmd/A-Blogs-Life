@@ -6,10 +6,14 @@ module.exports = (app) => {
         response.json(request.user);
     });
 
+
     app.post("/api/signup", (request, response) => {
+        const { email, password, firstName, lastName } = request.body;
         db.User.create({
-                email: request.body.email,
-                password: request.body.password
+                firstName,
+                lastName,
+                email,
+                password,
             })
             .then(() => {
                 response.redirect(307, "/api/login");
@@ -18,5 +22,12 @@ module.exports = (app) => {
                 response.status(401).json(err);
             });
     });
+
+    app.get("/logout", (request, response) => {
+        request.logout();
+        response.redirect("/");
+    });
+
+
 
 }
