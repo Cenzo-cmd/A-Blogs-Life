@@ -7,13 +7,13 @@ module.exports = (app) => {
   ////////// C - Create - Create new post
   //create blog post  ***ADD REDIRECT IF NECESSARY
   app.post("/api/BlogPosts", (request, response) => {
-    const { title, body } = request.body;
-    console.log("---------->", title, body);
+    // AS: changed this to pass the entire request body to the sequel request
+    // const { title, body } = request.body;
+    // console.log("---------->", title, body);
 
-    db.BlogPost.create({
-      title,
-      body,
-    })
+    db.BlogPost.create(request.body);
+    console
+      .log("---------------request.body", request.body)
       .then((result) => {
         // response.send(`blog named ${title} with a body ${body} created`);
         response.status(201).json(result);
@@ -28,7 +28,7 @@ module.exports = (app) => {
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
     if (request.query.user_id) {
-      query.UserID = request.query.user_id;
+      query.userID = request.query.user_id;
     }
     db.BlogPost.findAll({
       where: query,
