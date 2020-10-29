@@ -12,7 +12,8 @@ module.exports = (app) => {
       body,
     })
       .then((result) => {
-        response.send(`blog named ${title} with a body ${body} created`);
+        // response.send(`blog named ${title} with a body ${body} created`);
+        response.status(201).json(result);
       })
       .catch((err) => {
         response.status(401).json(err);
