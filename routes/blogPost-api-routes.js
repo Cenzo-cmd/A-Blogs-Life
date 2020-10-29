@@ -1,11 +1,14 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
+//TODO: ADD CATCH BLOCKS TO EACH PROMISE CHAIN
+
 module.exports = (app) => {
   ////////// C - Create - Create new post
   //create blog post  ***ADD REDIRECT IF NECESSARY
-  app.post("/api/BlogPost", (request, response) => {
+  app.post("/api/BlogPosts", (request, response) => {
     const { title, body } = request.body;
+    console.log("---------->", title, body);
 
     db.BlogPost.create({
       title,
@@ -21,18 +24,20 @@ module.exports = (app) => {
   });
 
   ////////// R - Read - Get one or all posts
-  //GET ALL blogPosts associated with a particular user
-  app.get("/api/BlogPosts/:user_id", (request, response) => {
+  //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
+  app.get("/api/BlogPosts", (request, response) => {
     const query = {};
-    if (request.params.user_id) {
-      query.UserID = request.params.user_id;
+    if (request.query.user_id) {
+      query.UserID = request.query.user_id;
     }
     db.BlogPost.findAll({
       where: query,
       include: [db.User],
-    }).then((dbPostResult) => {
-      response.json(dbPostResult);
-    });
+    })
+      .then((dbPostResult) => {
+        response.json(dbPostResult);
+      })
+      .catch((err) => console.log(err));
   });
 
   // Get ONE BlogPost associated with a particular BlogPost_id
@@ -56,7 +61,7 @@ module.exports = (app) => {
 
   ////////// D - Delete (Destroy) - Delete one or all posts
   // Delete a post based on its id
-  app.delete("/api/posts/:id", (request, response) => {
+  app.delete("/api/BlogPosts/:id", (request, response) => {
     db.BlogPost.destroy({
       where: {
         id: request.params.id,
