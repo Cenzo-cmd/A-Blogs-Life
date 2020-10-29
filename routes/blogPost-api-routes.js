@@ -11,9 +11,7 @@ module.exports = (app) => {
     // const { title, body } = request.body;
     // console.log("---------->", title, body);
 
-    db.BlogPost.create(request.body);
-    console
-      .log("---------------request.body", request.body)
+    db.BlogPost.create(request.body)
       .then((result) => {
         // response.send(`blog named ${title} with a body ${body} created`);
         response.status(201).json(result);
@@ -27,9 +25,11 @@ module.exports = (app) => {
   //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
-    if (request.query.user_id) {
-      query.userID = request.query.user_id;
+    console.log("request query line 29-------------", request.query);
+    if (request.query.UserId) {
+      query.UserID = request.query.UserId;
     }
+
     db.BlogPost.findAll({
       where: query,
       include: [db.User],
@@ -41,8 +41,8 @@ module.exports = (app) => {
   });
 
   // Get ONE BlogPost associated with a particular BlogPost_id
-  app.get("/api.BlogPosts/:BlogPost_id", (request, response) => {
-    db.BlogPost.findOne({ where: { id: req.params.id }, include: [db.User] }).then((dbPostResult) => {
+  app.get("/api/BlogPosts/:BlogPost_id", (request, response) => {
+    db.BlogPost.findOne({ where: { id: request.params.BlogPost_id }, include: [db.User] }).then((dbPostResult) => {
       response.json(dbPostResult);
     });
   });
@@ -52,22 +52,26 @@ module.exports = (app) => {
   app.put("/api/BlogPosts", (request, response) => {
     db.BlogPost.update(request.body, {
       where: {
-        id: request.body.id,
+        id: request.body.blogPost_id,
       },
-    }).then((dbPostResult) => {
-      res.json(dbPostResult);
-    });
+    })
+      .then((dbPostResult) => {
+        response.json(dbPostResult);
+      })
+      .catch((err) => console.log(err));
   });
 
   ////////// D - Delete (Destroy) - Delete one or all posts
   // Delete a post based on its id
-  app.delete("/api/BlogPosts/:id", (request, response) => {
+  app.delete("/api/BlogPosts/:BlogPost_id", (request, response) => {
     db.BlogPost.destroy({
       where: {
-        id: request.params.id,
+        id: request.params.BlogPost_id,
       },
-    }).then((dbPostResult) => {
-      res.json(dbPostResult);
-    });
+    })
+      .then((dbPostResult) => {
+        response.json(dbPostResult);
+      })
+      .catch((err) => console.log(err));
   });
 };
