@@ -1,5 +1,6 @@
 const db = require("../models");
 const passport = require("../config/passport");
+const { request, response } = require("express");
 
 module.exports = (app) => {
   //login in user with authentication
@@ -54,6 +55,18 @@ module.exports = (app) => {
   });
 
   ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
+  // Update user password
+  app.put("/api/users/:id", (request, response) => {
+    db.User.update(request.body, {
+      where: {
+        id: request.params.id
+      }
+    }).then((result) => {
+      response.json(result);
+    }).catch((err) => {
+      response.json(err);
+    });
+  });
 
   ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
