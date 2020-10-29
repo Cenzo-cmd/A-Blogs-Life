@@ -41,7 +41,28 @@ module.exports = (app) => {
       response.json(dbPostResult);
     });
   });
+
   ////////// U - Update - Change title or content of post?
+  // Flexibly update a post, passing in the updated key:value pairing in the request body
+  app.put("/api/BlogPosts", (request, response) => {
+    db.BlogPost.update(request.body, {
+      where: {
+        id: request.body.id,
+      },
+    }).then((dbPostResult) => {
+      res.json(dbPostResult);
+    });
+  });
 
   ////////// D - Delete (Destroy) - Delete one or all posts
+  // Delete a post based on its id
+  app.delete("/api/posts/:id", (request, response) => {
+    db.BlogPost.destroy({
+      where: {
+        id: request.params.id,
+      },
+    }).then((dbPostResult) => {
+      res.json(dbPostResult);
+    });
+  });
 };
