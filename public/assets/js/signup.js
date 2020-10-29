@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // $('.sidenav').sidenav(); // Materialize functionality for sidenav
+    $('.sidenav').sidenav(); // Materialize functionality for sidenav
 
     // Getting references to our form and input
     let signUpForm = $("form.signup");
