@@ -7,10 +7,16 @@ $(document).ready(function() {
     let password = $("input#password-input");
     let firstName = $("#first-name");
     let lastName = $("#last-name");
+    let reEnterPassword = $("#re-enter-password");
 
     // When the signup button is clicked... 
     signUpForm.on("submit", (event) => {
         event.preventDefault();
+        console.log(password, reEnterPassword);
+
+        if (password.val().trim() !== reEnterPassword.val().trim()) {
+            return;
+        }
 
         const userData = {
             firstName: firstName.val().trim(),
@@ -26,22 +32,15 @@ $(document).ready(function() {
         }
 
         $.ajax("/api/signup", {
-                method: "POST",
-                data: userData
-            })
-            .then(function(data) {
-                window.location.replace("/dashboard");
-                // If there's an error, handle it by throwing up a bootstrap alert
-            })
-            .catch(handleLoginErr);
+            method: "POST",
+            data: userData
+        }).then(function(data) {
+            window.location.replace("/dashboard");
+        }).catch(handleLoginErr);
 
         emailInput.val("");
         passwordInput.val("");
     });
-
-    // Does a post to the signup route. If successful, we are redirected to the dashboard page
-    // Otherwise we log any errors
-
 
     function handleLoginErr(err) {
         $("#alert .msg").text(err.responseJSON);
