@@ -15,6 +15,7 @@ module.exports = (app) => {
   });
 
   app.get("/dashboard", (request, response) => {
+    console.log("logging request.user from html dashboard route", request.user);
     response.render("dashboard", request.user);
   });
 };
