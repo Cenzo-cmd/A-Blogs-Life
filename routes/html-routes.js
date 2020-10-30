@@ -15,6 +15,6 @@ module.exports = (app) => {
   });
 
   app.get("/dashboard", (request, response) => {
-    response.render("dashboard");
+    response.render("dashboard", request.user);
   });
 };
