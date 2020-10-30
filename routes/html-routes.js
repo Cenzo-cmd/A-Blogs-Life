@@ -15,11 +15,12 @@ module.exports = (app) => {
         response.render("signup");
     });
 
+
     app.get("/dashboard", isAuthenticated, (request, response) => {
-        response.render("dashboard");
+        response.render("dashboard", request.user);
     });
 
     app.get("/dashboard/newPost", isAuthenticated, (request, response) => {
-        response.render("newPost");
+        response.render("newPost", request.user);
     })
 };
