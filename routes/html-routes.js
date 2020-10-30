@@ -1,21 +1,26 @@
 const path = require("path");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = (app) => {
-  // main route
-  app.get("/", (request, response) => {
-    // if (request.user) {
-    //     response.redirect("/members");
-    // }
-    response.render("index");
-    // response.sendFile(path.join(__dirname + "../views/index"))
-  });
+    // main route
+    app.get("/", (request, response) => {
+        // if (request.user) {
+        //     response.redirect("/members");
+        // }
+        response.render("index");
+        // response.sendFile(path.join(__dirname + "../views/index"))
+    });
 
-  app.get("/signup", (request, response) => {
-    response.render("signup");
-  });
+    app.get("/signup", (request, response) => {
+        response.render("signup");
+    });
 
-  app.get("/dashboard", (request, response) => {
-    console.log("logging request.user from html dashboard route", request.user);
-    response.render("dashboard", request.user);
-  });
+
+    app.get("/dashboard", isAuthenticated, (request, response) => {
+        response.render("dashboard", request.user);
+    });
+
+    app.get("/dashboard/newPost", isAuthenticated, (request, response) => {
+        response.render("newPost", request.user);
+    })
 };
