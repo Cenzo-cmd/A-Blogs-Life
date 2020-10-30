@@ -1,8 +1,7 @@
 <nav>
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">Logo</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
-                class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="">Search</a></li>
             <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
@@ -18,59 +17,45 @@
 <div class="container">
     <div class="section">
         <div class="row">
-            <div class="col s12 m4">
 
-                <!-- This is "profile" card, which displays user information -->
-                <div class="card">
-                    <div class="card-content">
-                        <p>This is a very simple card. It can contain user profile information. It
-                            would be easy to add
-                            an image if header/profile-img if we wanted. Tabs below could toggle
-                            between user
-                            information.</p>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
-                                class="material-icons">add</i></a>
-                    </div>
-                    <div class="card-tabs">
-                        <ul class="tabs tabs-fixed-width">
-                            <li class="tab"><a href="#test4">Test 1</a></li>
-                            <li class="tab"><a class="active" href="#test5">Test 2</a></li>
-                            <li class="tab"><a href="#test6">Test 3</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-content grey lighten-4">
-                        <div id="test4">Test 1</div>
-                        <div id="test5">Test 2</div>
-                        <div id="test6">Test 3</div>
-                    </div>
-                </div>
-            </div>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
-            <div class="col s12 m8">
-                <!-- The dashboard card. TODO: Add handlerbars functionality for #each post (once that information is established) -->
+
+
+            <div class="col s12 m12">
+                <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
                 <div class="card">
-                    <div class="card-image">
+                    {{!-- <div class="card-image">
                         <img src="https://placeimg.com/640/480/any">
                         <span class="card-title">Card Title</span>
-                    </div>
+                    </div> --}}
                     <div class="card-content">
-                        <p>This is a very simple card, which displays the type of post a blogger can
-                            make. We will need
-                            to use handlebars functions to communicate with the post methods</p>
+                        <p>Welcome, {{firstName}} {{lastName}}!</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <a href="/dashboard/newpost">Create a new post</a>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">View all your posts</a>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Edit Profile</a>
                     </div>
                 </div>
             </div>
+
+            <section id="blog-posts" class="col s12 m12">
+
+            </section>
+
+
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <!-- Compiled and minified JavaScript -->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="/assets/js/dashboard.js"></script>
