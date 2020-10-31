@@ -25,21 +25,31 @@ module.exports = (app) => {
             });
     });
 
+
+  ////////// R - Read - Get one or all posts
+  //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
+  app.get("/api/BlogPosts", (request, response) => {
+    const query = {};
+    if (request.query.UserId) {
+      query.UserID = request.query.UserId;
+    }
+
     ////////// R - Read - Get one or all posts
     //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
-    app.get("/api/BlogPosts", (request, response) => {
-        const query = {};
-        console.log('this is the user', request.user)
-        if (request.user) {
-            query.id = request.user.id;
-        }
-        console.log("THIS IS THE QUERY", query)
-        db.BlogPost.findAll({
-            where: query,
-            include: [db.User],
-        }).then((dbPostResult) => {
-            response.json(dbPostResult);
-        }).catch((err) => response.status(404).send());
+  //  app.get("/api/BlogPosts", (request, response) => {
+  //      const query = {};
+   //     console.log('this is the user', request.user)
+   //     if (request.user) {
+   //         query.id = request.user.id;
+  //      }
+   //     console.log("THIS IS THE QUERY", query)
+   //     db.BlogPost.findAll({
+   //         where: query,
+   //         include: [db.User],
+   //     }).then((dbPostResult) => {
+    //        response.json(dbPostResult);
+   //     }).catch((err) => response.status(404).send());
+
 
     });
 

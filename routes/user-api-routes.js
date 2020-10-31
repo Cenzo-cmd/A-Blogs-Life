@@ -27,47 +27,72 @@ module.exports = (app) => {
 
     ////////// R - Read - Get one or all  Users
 
-    //Get ALL Users AND their associated BlogPosts
-    app.get("/api/users", (request, response) => {
-        // "include" in findAll will join,
-        //  equivalent of  SELECT * FROM Users LEFT OUTER JOIN BlogPosts ON Users.id = BlogPosts.user_id;
-        db.User.findAll({
-            //TODO: Make sure this works AAS
-        }).then(function(dbUser) {
-            response.json(dbUser);
-        });
+  //Get ALL Users AND their associated BlogPosts
+  //TODO: change this to all users? is that RESTful?
+  app.get("/api/users", (request, response) => {
+    // "include" in findAll will join,
+    //  equivalent of  SELECT * FROM Users LEFT OUTER JOIN BlogPosts ON Users.id = BlogPosts.user_id;
+    db.User.findAll({
+      //TODO: Make sure this works AAS
+      include: [db.BlogPost],
+    }).then(function (dbUser) {
+      response.json(dbUser);
+    });
+  });
+
+  //tester
+
+  //endpoint to grab one user's profile information
+//   app.get("/api/users/userdata", (request, response) => {
+//     // "include" in findOne will join,
+//     // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
+//     console.log("logging request.user", request.user);
+//     db.User.findOne({
+//       where: {
+//         id: request.user.id,
+//       },
+//       //TODO: Why is it only returning one?
+//       include: [db.BlogPost],
+//     }).then(function (dbUser) {
+//       response.json(dbUser);
+//     });
+
+
+  //tester end
+
+  //Get ONE User AND their associated BlogPosts
+  app.get("/api/users/:id", (request, response) => {
+    // "include" in findOne will join,
+    // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
+    db.User.findOne({
+      where: {
+        id: request.params.id,
+      },
+      //TODO: Make sure this works AAS
+      include: [db.BlogPost],
+    }).then(function (dbUser) {
+      response.json(dbUser);
+
     });
 
-    //Get ONE User AND their associated BlogPosts
-    app.get("/api/users/:id", (request, response) => {
-        // "include" in findOne will join,
-        // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
-        db.User.findOne({
-            where: {
-                id: request.params.id,
-            },
-            //TODO: Make sure this works AAS
-            include: [db.Post],
-        }).then(function(dbAuthor) {
-            response.json(dbAuthor);
-        });
-    });
 
-    ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
-    // Update user password
-    app.put("/api/users/:id", (request, response) => {
-        db.User.update(request.body, {
-                where: {
-                    id: request.params.id,
-                },
-            })
-            .then((result) => {
-                response.json(result);
-            })
-            .catch((err) => {
-                response.json(err);
-            });
-    });
+  ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
+  // Update user password
+  app.put("/api/users/", (request, response) => {
+    console.log("REQUEST!!!!!!!!!!!", request);
+    db.User.update(request.body, {
+      where: {
+        id: request.user.id,
+      },
+    })
+      .then((result) => {
+        response.json(result);
+      })
+      .catch((err) => {
+        response.json(err);
+      });
+  });
+
 
     ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
     // delete user

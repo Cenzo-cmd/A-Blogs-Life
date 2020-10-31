@@ -38,10 +38,12 @@ $(document).ready(function () {
     });
     // .catch(handleLoginErr());
   }
-  //   FIXME: WHY TF IS THIS NOT WORKING AAAAAAAHHHHHH IT WORKS IN THE HANDLEBARS???????!?!?!?!?!?!
-  $("button").on("click", (event) => {
-    // event.preventDefault();
-    const postToEditID = event.currentTarget.blogpostid;
+
+  //event listener for "Edit a post" buttons
+  $(document).on("click", ".edit-post-button", (event) => {
+    event.preventDefault();
+
+    const postToEditID = event.currentTarget.dataset.blogpostid;
     console.log("postToEditID", postToEditID);
   });
 
