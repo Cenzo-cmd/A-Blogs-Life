@@ -8,11 +8,13 @@ $(document).ready(() => {
   const firstNameField = $("#first_name");
   const lastNameField = $("#last_name");
   const emailField = $("#email");
+  const username = $("#username");
   populateProfileFields();
 
   function populateProfileFields() {
     console.log("I'm trying to get user data!");
     $.get("/api/users/userdata", (userData) => {
+      console.log("user data log", userData);
       $("#first_name").text = userData.firstName;
       $("#last_name").text = userData.lastName;
       $("#username").text = userData.username;

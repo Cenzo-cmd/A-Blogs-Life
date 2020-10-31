@@ -41,24 +41,21 @@ module.exports = (app) => {
     });
   });
 
-  //tester
-
   //endpoint to grab one user's profile information
-  //   app.get("/api/users/userdata", (request, response) => {
-  //     // "include" in findOne will join,
-  //     // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
-  //     console.log("logging request.user", request.user);
-  //     db.User.findOne({
-  //       where: {
-  //         id: request.user.id,
-  //       },
-  //       //TODO: Why is it only returning one?
-  //       include: [db.BlogPost],
-  //     }).then(function (dbUser) {
-  //       response.json(dbUser);
-  //     });
-
-  //tester end
+  app.get("/api/users/userdata", (request, response) => {
+    // "include" in findOne will join,
+    // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
+    console.log("logging request.user", request.user);
+    db.User.findOne({
+      where: {
+        id: request.user.id,
+      },
+      //TODO: Why is it only returning one?
+      include: [db.BlogPost],
+    }).then((dbUser) => {
+      response.json(dbUser);
+    });
+  });
 
   //Get ONE User AND their associated BlogPosts
   app.get("/api/users/:id", (request, response) => {
