@@ -25,7 +25,6 @@ module.exports = (app) => {
   //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
-    console.log("request query line 29-------------", request.query);
     if (request.query.UserId) {
       query.UserID = request.query.UserId;
     }
