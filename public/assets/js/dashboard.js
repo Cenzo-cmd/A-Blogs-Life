@@ -15,19 +15,21 @@ $(document).ready(function () {
   //grab blog posts associated with this user and render them on the page as cards
   //TODO: does this need try/catch?
   function populateBlogPosts() {
+    console.log("I'm populating blog posts!");
     $.get("/api/blogposts/", (data) => {
       console.log(data);
       data.forEach((blogPost) => {
         let newPost = `
-        <div class="row" id="blog-post-${blogPost.id}>
+        <div class="row" id="blog-post-${blogPost.id}">
         <div class="card blue-grey darken-1 col m10">
             <div class="card-content white-text">
                 <span class="card-title">${blogPost.title}</span>
                 <p>${blogPost.body}</p>
             </div>
         </div>
-        <div class="col m2" style="padding-top: 3rem" >
-          <button class ="edit-post-button" data-blogPostId=${blogPost.id} type="button">Edit Post</button>
+        <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
+
+        <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit Post</button>
         </div>  
     </div>
       `;
@@ -36,26 +38,34 @@ $(document).ready(function () {
     });
     // .catch(handleLoginErr());
   }
+  //   FIXME: WHY TF IS THIS NOT WORKING AAAAAAAHHHHHH IT WORKS IN THE HANDLEBARS???????!?!?!?!?!?!
+  $("button").on("click", (event) => {
+    // event.preventDefault();
+    const postToEditID = event.currentTarget.blogpostid;
+    console.log("postToEditID", postToEditID);
+  });
 
-  //   <!-- Modal Structure -->
+  //FIXME: Attempting a MODAL for editing content
+  //
+  //Trigger:
+  //  <a class="edit-post-button waves-effect waves-light btn modal-trigger" data-blogPostId=${blogPost.id} href="#modal1">Modal</a>
+  //
+  //Content:
   //   <div id="modal1" class="modal">
-  //       <div class="modal-content">
-
-  //       <div class="input-field col s12">
-  //           <input  id="post-title" type="text" class="validate">
-  //           <label for="post-title">title</label>
-  //         </div>
-
-  //         <div class="input-field col s12">
-  //           <input  id="post-body" type="text" class="validate">
-  //           <label for="post-body">body</label>
-  //         </div>
-
-  //       </div>
-  //       <div class="modal-footer">
-  //           <button id = "update-blogpost-button-${blogPost.id}" class="update-blogpost-button modal-close waves-effect waves-green btn-flat">Submit</button>
-  //       </div>
+  //   <div class="modal-content">
+  //   <div class="input-field col s12">
+  //       <input  id="post-title" type="text" class="validate">
+  //       <label for="post-title">title</label>
+  //     </div>
+  //     <div class="input-field col s12">
+  //       <input  id="post-body" type="text" class="validate">
+  //       <label for="post-body">body</label>
+  //     </div>
   //   </div>
+  //   <div class="modal-footer">
+  //       <button id = "update-blogpost-button-${blogPost.id}" class="update-blogpost-button modal-close waves-effect waves-green btn-flat">Submit</button>
+  //   </div>
+  // </div>
 
   //Materialize modal event listener
   document.addEventListener("DOMContentLoaded", function () {
