@@ -1,5 +1,5 @@
 const db = require("../models");
-const passport = require("../config/passport");
+// const passport = require("../config/passport");
 
 //TODO: ADD CATCH BLOCKS TO EACH PROMISE CHAIN
 
@@ -49,7 +49,7 @@ module.exports = (app) => {
       .then((dbPostResult) => {
         response.json(dbPostResult);
       })
-      .catch((err) => response.status(404).send());
+      .catch(() => response.status(404).send());
   });
 
   // Get ONE BlogPost associated with a particular BlogPost_id

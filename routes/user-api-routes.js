@@ -35,7 +35,7 @@ module.exports = (app) => {
     db.User.findAll({
       //TODO: Make sure this works AAS
       include: [db.BlogPost],
-    }).then(function (dbUser) {
+    }).then((dbUser) => {
       response.json(dbUser);
     });
   });
@@ -69,7 +69,7 @@ module.exports = (app) => {
       },
       //TODO: Make sure this works AAS
       include: [db.BlogPost],
-    }).then(function (dbUser) {
+    }).then((dbUser) => {
       response.json(dbUser);
     });
   });
