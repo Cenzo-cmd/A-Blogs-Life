@@ -22,8 +22,8 @@ require("./routes/user-api-routes")(app);
 require("./routes/blogPost-api-routes")(app);
 
 //TODO: force true to change data structures
-db.sequelize.sync({ force: false }).then(function () {
-  app.listen(PORT, () => {
-    console.log(`Server is live at http://localhost:${PORT}`);
-  });
+db.sequelize.sync({ force: false }).then(function() {
+    app.listen(PORT, () => {
+        console.log(`Server is live at http://localhost:${PORT}`);
+    });
 });
