@@ -3,29 +3,29 @@ const passport = require("../config/passport");
 // const { request, response } = require("express");
 
 module.exports = (app) => {
-  //login in user with authentication
-  app.post("/api/login", passport.authenticate("local"), (request, response) => {
-    response.json(request.user);
-  });
+    //login in user with authentication
+    app.post("/api/login", passport.authenticate("local"), (request, response) => {
+        response.json(request.user);
+    });
 
-  ////////// C - Create - Create a new User
-  app.post("/api/signup", (request, response) => {
-    const { email, password, firstName, lastName } = request.body;
-    db.User.create({
-      firstName,
-      lastName,
-      email,
-      password,
-    })
-      .then(() => {
-        response.redirect(307, "/api/login");
-      })
-      .catch((err) => {
-        response.status(401).json(err);
-      });
-  });
+    ////////// C - Create - Create a new User
+    app.post("/api/signup", (request, response) => {
+        const { email, password, firstName, lastName } = request.body;
+        db.User.create({
+                firstName,
+                lastName,
+                email,
+                password,
+            })
+            .then(() => {
+                response.redirect(307, "/api/login");
+            })
+            .catch((err) => {
+                response.status(401).json(err);
+            });
+    });
 
-  ////////// R - Read - Get one or all  Users
+    ////////// R - Read - Get one or all  Users
 
   //Get ALL Users AND their associated BlogPosts
   //TODO: change this to all users? is that RESTful?
@@ -43,20 +43,20 @@ module.exports = (app) => {
   //tester
 
   //endpoint to grab one user's profile information
-  app.get("/api/users/userdata", (request, response) => {
-    // "include" in findOne will join,
-    // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
-    console.log("logging request.user", request.user);
-    db.User.findOne({
-      where: {
-        id: request.user.id,
-      },
-      //TODO: Why is it only returning one?
-      include: [db.BlogPost],
-    }).then(function (dbUser) {
-      response.json(dbUser);
-    });
-  });
+//   app.get("/api/users/userdata", (request, response) => {
+//     // "include" in findOne will join,
+//     // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
+//     console.log("logging request.user", request.user);
+//     db.User.findOne({
+//       where: {
+//         id: request.user.id,
+//       },
+//       //TODO: Why is it only returning one?
+//       include: [db.BlogPost],
+//     }).then(function (dbUser) {
+//       response.json(dbUser);
+//     });
+
 
   //tester end
 
@@ -72,8 +72,9 @@ module.exports = (app) => {
       include: [db.BlogPost],
     }).then(function (dbUser) {
       response.json(dbUser);
+
     });
-  });
+
 
   ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
   // Update user password
@@ -92,26 +93,27 @@ module.exports = (app) => {
       });
   });
 
-  ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
-  // delete user
-  app.delete("/profile/:id", (request, response) => {
-    console.log(request.params);
-    db.User.destroy({
-      where: {
-        id: request.params.id,
-      },
-    })
-      .then((result) => {
-        response.json({ id: result });
-      })
-      .catch((err) => {
-        response.status(401).json(err);
-      });
-  });
 
-  //logout
-  app.get("/logout", (request, response) => {
-    request.logout();
-    response.redirect("/");
-  });
+    ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
+    // delete user
+    app.delete("/profile/:id", (request, response) => {
+        console.log(request.params);
+        db.User.destroy({
+                where: {
+                    id: request.params.id,
+                },
+            })
+            .then((result) => {
+                response.json({ id: result });
+            })
+            .catch((err) => {
+                response.status(401).json(err);
+            });
+    });
+
+    //logout
+    app.get("/logout", (request, response) => {
+        request.logout();
+        response.redirect("/");
+    });
 };
