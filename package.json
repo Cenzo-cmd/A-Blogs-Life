@@ -5,7 +5,10 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "server": "nodemon server.js"
+        "server": "nodemon server.js",
+        "test": "npm run lint",
+        "lint": "eslint --quiet .",
+        "fix": "eslint --fix ."
     },
     "repository": {
         "type": "git",
