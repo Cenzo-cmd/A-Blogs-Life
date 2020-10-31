@@ -4,6 +4,7 @@ $(document).ready(function() {
     // Getting references to our form and input
     let signUpForm = $("form.signup");
     let email = $("input#email-input");
+    let username = $("input#username-input");
     let password = $("input#password-input");
     let firstName = $("#first-name");
     let lastName = $("#last-name");
@@ -21,6 +22,7 @@ $(document).ready(function() {
         const userData = {
             firstName: firstName.val().trim(),
             lastName: lastName.val().trim(),
+            username: username.val().trim(),
             email: email.val().trim(),
             password: password.val().trim()
         };

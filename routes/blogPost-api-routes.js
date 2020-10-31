@@ -1,5 +1,5 @@
 const db = require("../models");
-const passport = require("../config/passport");
+// const passport = require("../config/passport");
 
 //TODO: ADD CATCH BLOCKS TO EACH PROMISE CHAIN
 
@@ -8,10 +8,14 @@ module.exports = (app) => {
   //create blog post  ***ADD REDIRECT IF NECESSARY
   app.post("/api/BlogPosts", (request, response) => {
     // AS: changed this to pass the entire request body to the sequel request
-    // const { title, body } = request.body;
-    // console.log("---------->", title, body);
-
-    db.BlogPost.create(request.body)
+    const { title, body } = request.body;
+    const newPost = {
+      title,
+      body,
+      UserId: request.user.id,
+    };
+    console.log(request.user.id);
+    db.BlogPost.create(newPost)
       .then((result) => {
         // response.send(`blog named ${title} with a body ${body} created`);
         response.status(201).json(result);
@@ -21,15 +25,23 @@ module.exports = (app) => {
       });
   });
 
-  ////////// R - Read - Get one or all posts
+  ////////// R - Read - Get one or all posts //TODO: pretty sure we can delete all of this
   //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
+  // app.get("/api/BlogPosts", (request, response) => {
+  //   const query = {};
+  //   if (request.query.UserId) {
+  //     query.UserID = request.query.UserId;
+  //   }
+
+  ////////// R - Read - Get one or all posts
+  // user id is passed in from request.user object
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
-    console.log("request query line 29-------------", request.query);
-    if (request.query.UserId) {
-      query.UserID = request.query.UserId;
+    console.log("this is the user", request.user);
+    if (request.user) {
+      query.UserId = request.user.id;
     }
-
+    console.log("THIS IS THE QUERY", query);
     db.BlogPost.findAll({
       where: query,
       include: [db.User],
@@ -37,7 +49,7 @@ module.exports = (app) => {
       .then((dbPostResult) => {
         response.json(dbPostResult);
       })
-      .catch((err) => console.log(err));
+      .catch(() => response.status(404).send());
   });
 
   // Get ONE BlogPost associated with a particular BlogPost_id
