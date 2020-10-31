@@ -15,6 +15,7 @@ $(document).ready(function () {
     $.get("/api/users/userdata", (userData) => {
       $("#first_name").text = userData.firstName;
       $("#last_name").text = userData.lastName;
+      $("#username").text = userData.username;
       $("#email").text = userData.email;
     });
   }
@@ -24,6 +25,7 @@ $(document).ready(function () {
     const updateQuery = {
       firstName: firstNameField.val().trim(),
       lastName: lastNameField.val().trim(),
+      username: username.val().trim(),
       email: emailField.val().trim(),
     };
     //   $.put("/api/users/:id", updateQuery, (results)=>{
