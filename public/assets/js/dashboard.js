@@ -2,9 +2,9 @@ $(document).ready(function () {
   $(".sidenav").sidenav(); // Materialize functionality for sidenav
   $(".tabs").tabs(); // Materialize functionality for tabs on profile
 
-  //Materialize modal event listener
-  $(".modal").modal();
-
+  $("document .modal-trigger").on("click", (event) => {
+    console.log("I'm a genius are yuou a genius");
+  });
   //Where blog posts live on the page
   const blogPostsEl = $("#blog-posts");
 
@@ -13,6 +13,7 @@ $(document).ready(function () {
     $("#alert").fadeIn(500);
   }
 
+  document.title = "It's a Blog's Life";
   populateBlogPosts();
 
   //grab blog posts associated with this user and render them on the page as cards
@@ -32,15 +33,32 @@ $(document).ready(function () {
         </div>
         <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
 
-        <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit Post</button>
-        </div>  
+            <a id="testTrigger" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger" href="#modal${blogPost.id}">Edit Post</a>
+            <div id="modal${blogPost.id}" class="modal">
+                <div class="modal-content">
+                    <h4>${blogPost.title}</h4>
+                    <p>${blogPost.body}</p>
+                </div>
+            </div>
+        </div>
     </div>
-      `;
+            `;
         blogPostsEl.append(newPost);
       });
+
+      const elems = document.querySelectorAll(".modal");
+      const instances = M.Modal.init(elems);
     });
     // .catch(handleLoginErr());
   }
+  // $(document).on("click", "#testTrigger", (event) => {
+  //   console.log("YOU CLICKED ME");
+  // });
+
+  $(".modal").modal();
+  // $("#modal1").modal();
+
+  // <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit Post</button>
 
   //event listener for "Edit a post" buttons
   $(document).on("click", ".edit-post-button", (event) => {
@@ -49,26 +67,9 @@ $(document).ready(function () {
     const postToEditID = event.currentTarget.dataset.blogpostid;
     console.log("postToEditID", postToEditID);
   });
-
-  //FIXME: Attempting a MODAL for editing content
-  //
-  //Trigger:
-  //  <a class="edit-post-button waves-effect waves-light btn modal-trigger" data-blogPostId=${blogPost.id} href="#modal1">Modal</a>
-  //
-  //Content:
-  //   <div id="modal1" class="modal">
-  //   <div class="modal-content">
-  //   <div class="input-field col s12">
-  //       <input  id="post-title" type="text" class="validate">
-  //       <label for="post-title">title</label>
-  //     </div>
-  //     <div class="input-field col s12">
-  //       <input  id="post-body" type="text" class="validate">
-  //       <label for="post-body">body</label>
-  //     </div>
-  //   </div>
-  //   <div class="modal-footer">
-  //       <button id = "update-blogpost-button-${blogPost.id}" class="update-blogpost-button modal-close waves-effect waves-green btn-flat">Submit</button>
-  //   </div>
-  // </div>
+  // $(document).on("click", ".modal-trigger", (event) => {
+  //   console.log("hiiiiiiiiiiiiiii");
+  //   //Materialize modal event listener
+  //   $(".modal").modal();
+  // });
 });
