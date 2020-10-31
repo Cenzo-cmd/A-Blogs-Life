@@ -32,16 +32,30 @@ $(document).ready(function () {
             </div>
         </div>
         <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
-
-            <a id="testTrigger" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger" href="#modal${blogPost.id}">Edit Post</a>
+    
+            <a id="testTrigger" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger"
+                href="#modal${blogPost.id}">Edit Post</a>
             <div id="modal${blogPost.id}" class="modal">
                 <div class="modal-content">
-                    <h4>${blogPost.title}</h4>
-                    <p>${blogPost.body}</p>
+    
+                    <form class="update-blogPost-form" data-id=${blogPost.id}>
+                 
+                        <input value=${blogPost.title} id="title" type="text" class="validate">
+                        <label class="active" for="title">title</label>
+    
+                        <input value=${blogPost.body} id="body" type="text" class="validate">
+                        <label class="active" for="body">body</label>
+                         <br>
+                        <button style = "margin-left: 5rem" class="btn waves-effect waves-light" type="submit" name="action">Update Post
+                        <i class="material-icons right">send</i>
+                    </button>
+    
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    
             `;
         blogPostsEl.append(newPost);
       });
@@ -51,25 +65,27 @@ $(document).ready(function () {
     });
     // .catch(handleLoginErr());
   }
-  // $(document).on("click", "#testTrigger", (event) => {
-  //   console.log("YOU CLICKED ME");
-  // });
 
   $(".modal").modal();
-  // $("#modal1").modal();
+  M.updateTextFields();
 
-  // <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit Post</button>
-
-  //event listener for "Edit a post" buttons
-  $(document).on("click", ".edit-post-button", (event) => {
+  // //event listener for "submit post edits" buttons
+  $(document).on("submit", ".update-blogPost-form", (event) => {
     event.preventDefault();
+    console.log("I HEAR YOURE TRYING TO UPDATE A POST");
+    const updateQuery = {
+      title: $("#title").val(),
+      body: $("#body").val(),
+      blogPost_id: event.currentTarget.dataset.id,
+    };
+    console.log("updateQuery", updateQuery);
 
-    const postToEditID = event.currentTarget.dataset.blogpostid;
-    console.log("postToEditID", postToEditID);
+    // $.put("/api/blogposts", updateQuery, (results) => {
+    //   window.location.replace("/dashboard");
+    // });
+
+    $.ajax("/api/blogposts", { method: "PUT", data: updateQuery }).then(() => {
+      window.location.replace("/dashboard");
+    });
   });
-  // $(document).on("click", ".modal-trigger", (event) => {
-  //   console.log("hiiiiiiiiiiiiiii");
-  //   //Materialize modal event listener
-  //   $(".modal").modal();
-  // });
 });
