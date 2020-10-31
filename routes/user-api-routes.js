@@ -10,10 +10,11 @@ module.exports = (app) => {
 
   ////////// C - Create - Create a new User
   app.post("/api/signup", (request, response) => {
-    const { email, password, firstName, lastName } = request.body;
+    const { email, password, username, firstName, lastName } = request.body;
     db.User.create({
       firstName,
       lastName,
+      username,
       email,
       password,
     })
