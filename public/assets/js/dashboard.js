@@ -1,17 +1,15 @@
-$(document).ready(function () {
+$(document).ready(() => {
   $(".sidenav").sidenav(); // Materialize functionality for sidenav
   $(".tabs").tabs(); // Materialize functionality for tabs on profile
 
-  $("document .modal-trigger").on("click", (event) => {
-    console.log("I'm a genius are yuou a genius");
-  });
   //Where blog posts live on the page
   const blogPostsEl = $("#blog-posts");
 
-  function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
-  }
+  //unused function right now
+  // function handleLoginErr(err) {
+  //   $("#alert .msg").text(err.responseJSON);
+  //   $("#alert").fadeIn(500);
+  // }
 
   document.title = "It's a Blog's Life";
   populateBlogPosts();
@@ -23,7 +21,7 @@ $(document).ready(function () {
     $.get("/api/blogposts/", (data) => {
       console.log(data);
       data.forEach((blogPost) => {
-        let newPost = `
+        const newPost = `
         <div class="row" id="blog-post-${blogPost.id}">
         <div class="card blue-grey darken-1 col m10">
             <div class="card-content white-text">
@@ -46,8 +44,8 @@ $(document).ready(function () {
         blogPostsEl.append(newPost);
       });
 
-      const elems = document.querySelectorAll(".modal");
-      const instances = M.Modal.init(elems);
+      // const elems = document.querySelectorAll(".modal"); // elems is not being called anywhere
+      // const instances = M.Modal.init(elems); // instances is not being called anywhere
     });
     // .catch(handleLoginErr());
   }
