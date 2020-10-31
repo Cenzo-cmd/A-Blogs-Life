@@ -9,6 +9,7 @@ module.exports = (app) => {
   app.post("/api/BlogPosts", (request, response) => {
     // AS: changed this to pass the entire request body to the sequel request
     const { title, body } = request.body;
+    //TODO: add escape character to the string (split to compare first)
     const newPost = {
       title,
       body,
@@ -62,6 +63,7 @@ module.exports = (app) => {
   ////////// U - Update - Change title or content of post?
   // Flexibly update a post, passing in the updated key:value pairing in the request body
   app.put("/api/BlogPosts", (request, response) => {
+    console.log("request.body.blogPost_id", request.body.blogPost_id);
     db.BlogPost.update(request.body, {
       where: {
         id: request.body.blogPost_id,
