@@ -1,13 +1,13 @@
-$(document).ready(function () {
+$(document).ready(() => {
   $(".sidenav").sidenav(); // Materialize functionality for sidenav
   $(".tabs").tabs(); // Materialize functionality for tabs on profile
 
   //materialize prefill
   M.updateTextFields();
 
-  let firstNameField = $("#first_name");
-  let lastNameField = $("#last_name");
-  let emailField = $("#email");
+  const firstNameField = $("#first_name");
+  const lastNameField = $("#last_name");
+  const emailField = $("#email");
   populateProfileFields();
 
   function populateProfileFields() {
@@ -32,7 +32,7 @@ $(document).ready(function () {
     //       results.
     //   })
 
-    $.ajax("/api/users/", { method: "PUT", data: updateQuery }).then((results) => {
+    $.ajax("/api/users/", { method: "PUT", data: updateQuery }).then(() => {
       window.location.replace("/dashboard");
     });
   });

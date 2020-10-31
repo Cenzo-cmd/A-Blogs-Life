@@ -60,8 +60,7 @@ $(document).ready(() => {
         blogPostsEl.append(newPost);
       });
 
-      const elems = document.querySelectorAll(".modal");
-      const instances = M.Modal.init(elems);
+      M.Modal.init(document.querySelectorAll(".modal"));
     });
     // .catch(handleLoginErr());
   }
@@ -72,10 +71,11 @@ $(document).ready(() => {
   // //event listener for "submit post edits" buttons
   $(document).on("submit", ".update-blogPost-form", (event) => {
     event.preventDefault();
-    console.log("I HEAR YOURE TRYING TO UPDATE A POST");
+    console.log("I HEAR YOU'RE TRYING TO UPDATE A POST");
     const updateQuery = {
       title: $("#title").val(),
       body: $("#body").val(),
+      // eslint-disable-next-line camelcase
       blogPost_id: event.currentTarget.dataset.id,
     };
     console.log("updateQuery", updateQuery);

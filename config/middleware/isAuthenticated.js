@@ -1,9 +1,9 @@
-const { request, response } = require("express");
+// const { request, response } = require("express");
 
 module.exports = (request, response, next) => {
-    if (request.user) {
-        return next();
-    }
+  if (request.user) {
+    return next();
+  }
 
-    return response.redirect("/");
-}
+  return response.redirect("/");
+};
