@@ -21,12 +21,40 @@
     <div class="section">
         <div class="row">
 
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+            {{!-- dummy  --}}
+            {{!-- <div class="row" id="blog-post-${blogPost.id}">
+                <div class="card blue-grey darken-1 col m10">
+                    <div class="card-content white-text">
+                        <span class="card-title">${blogPost.title}</span>
+                        <p>${blogPost.body}</p>
+                    </div>
+                </div>
+                <div class="col m2" style="padding-top: 3rem">
+                    <!-- Modal Trigger -->
+                    <a class="edit-post-button waves-effect waves-light btn modal-trigger"
+                        data-blogPostId=${blogPost.id} href="#modal1">Modal</a>
+                </div>
+            </div> --}}
+
+            <div class="row" id="blog-post-${blogPost.id}">
+                <div class="card blue-grey darken-1 col m10">
+                    <div class="card-content white-text">
+                        <span class="card-title">${blogPost.title}</span>
+                        <p>${blogPost.body}</p>
+                    </div>
+                </div>
+                <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
+
+                    <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit
+                        Post</button>
+                </div>
+            </div>
 
 
+            {{!-- end dummy --}}
 
-            <div class="col s12 m12">
+
+            <div style="margin-bottom:3rem" class="col s12 m12">
                 <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
                 <div class="card">
                     {{!-- <div class="card-image">
@@ -34,22 +62,25 @@
                         <span class="card-title">Card Title</span>
                     </div> --}}
                     <div class="card-content">
-                        <p>Welcome, {{firstName}} {{lastName}}!</p>
+                        <h3>Welcome, {{firstName}} {{lastName}}!</h3>
                     </div>
                     <div class="card-action">
                         <a href="/dashboard/newpost">Create a new post</a>
                     </div>
                     <div class="card-action">
-                        <a href="#">View all your posts</a>
+                        <a href="#blog-posts">View all your posts</a>
                     </div>
                     <div class="card-action">
-                        <a href="#">Edit Profile</a>
+                        <a href="/dashboard/updateProfile">Edit Profile</a>
                     </div>
                 </div>
             </div>
 
-            <section id="blog-posts" class="col s12 m12">
 
+
+            <h4>Your Blog Posts:</h4>
+            {{!-- The place where blog posts live --}}
+            <section id="blog-posts" class="col s12 m12">
             </section>
 
 
