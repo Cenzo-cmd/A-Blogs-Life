@@ -21,6 +21,8 @@ $(document).ready(() => {
     $.get("/api/blogposts/", (data) => {
       console.log(data);
       data.forEach((blogPost) => {
+        console.log(blogPost.title);
+        console.log(blogPost.body);
         const newPost = `
         <div class="row" id="blog-post-${blogPost.id}">
         <div class="card blue-grey darken-1 col m10">
@@ -38,15 +40,15 @@ $(document).ready(() => {
     
                     <form class="update-blogPost-form" data-id=${blogPost.id}>
                  
-                        <input value=${blogPost.title} id="title" type="text" class="validate">
+                        <input value="${blogPost.title}" id="title" type="text" class="validate">
                         <label class="active" for="title">title</label>
     
-                        <input value=${blogPost.body} id="body" type="text" class="validate">
+                        <input value="${blogPost.body}" id="body" type="text" class="validate">
                         <label class="active" for="body">body</label>
                          <br>
                         <button style = "margin-left: 5rem" class="btn waves-effect waves-light" type="submit" name="action">Update Post
                         <i class="material-icons right">send</i>
-                    </button>
+                        </button>
     
                     </form>
                 </div>
@@ -58,8 +60,8 @@ $(document).ready(() => {
         blogPostsEl.append(newPost);
       });
 
-      // const elems = document.querySelectorAll(".modal"); // elems is not being called anywhere
-      // const instances = M.Modal.init(elems); // instances is not being called anywhere
+      const elems = document.querySelectorAll(".modal");
+      const instances = M.Modal.init(elems);
     });
     // .catch(handleLoginErr());
   }
