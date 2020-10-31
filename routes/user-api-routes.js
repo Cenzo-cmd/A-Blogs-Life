@@ -74,20 +74,27 @@ module.exports = (app) => {
 
   ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
   // Update user password
-  app.put("/api/users/", (request, response) => {
-    console.log("REQUEST!!!!!!!!!!!", request);
-    db.User.update(request.body, {
-      where: {
-        id: request.user.id,
-      },
-    })
-      .then((result) => {
-        response.json(result);
+  app.put(
+    "/api/users/:id",
+    (request, response) => {
+      console.log("REQUEST!!!!!!!!!!!", request);
+      // if (request.user.id === request.params.id) {
+      db.User.update(request.body, {
+        where: {
+          id: request.params.id,
+        },
       })
-      .catch((err) => {
-        response.json(err);
-      });
-  });
+        .then((result) => {
+          response.json(result);
+        })
+        .catch((err) => {
+          response.json(err);
+        });
+    }
+    // else {
+    //   response.redirect("/dashboard");
+    // }
+  );
 
   ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
