@@ -2,6 +2,9 @@ $(document).ready(function () {
   $(".sidenav").sidenav(); // Materialize functionality for sidenav
   $(".tabs").tabs(); // Materialize functionality for tabs on profile
 
+  //Materialize modal event listener
+  $(".modal").modal();
+
   //Where blog posts live on the page
   const blogPostsEl = $("#blog-posts");
 
@@ -68,16 +71,4 @@ $(document).ready(function () {
   //       <button id = "update-blogpost-button-${blogPost.id}" class="update-blogpost-button modal-close waves-effect waves-green btn-flat">Submit</button>
   //   </div>
   // </div>
-
-  //Materialize modal event listener
-  document.addEventListener("DOMContentLoaded", function () {
-    var elems = document.querySelectorAll(".modal");
-    var instances = M.Modal.init(elems, options);
-  });
-
-  // Or with jQuery
-
-  $(document).ready(function () {
-    $(".modal").modal();
-  });
 });
