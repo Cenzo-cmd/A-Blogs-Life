@@ -34,12 +34,12 @@ module.exports = (app) => {
   //   }
 
   ////////// R - Read - Get one or all posts
-  //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
+  // user id is passed in from request.user object
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
     console.log("this is the user", request.user);
     if (request.user) {
-      query.id = request.user.id;
+      query.UserId = request.user.id;
     }
     console.log("THIS IS THE QUERY", query);
     db.BlogPost.findAll({
