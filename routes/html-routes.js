@@ -26,4 +26,8 @@ module.exports = (app) => {
   app.get("/dashboard/updateProfile", isAuthenticated, (request, response) => {
     response.render("updateProfile", request.user);
   });
+
+  app.get("/feed", isAuthenticated, (request, response) => {
+    response.render("feed", request.user);
+  });
 };
