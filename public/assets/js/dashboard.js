@@ -33,20 +33,20 @@ $(document).ready(() => {
         </div>
         <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
     
-            <a id="testTrigger" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger"
+            <a id="testTrigger" data-postID="${blogPost.id}" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger"
                 href="#modal${blogPost.id}">Edit Post</a>
             <div id="modal${blogPost.id}" class="modal">
                 <div class="modal-content">
     
                     <form class="update-blogPost-form" data-id=${blogPost.id}>
                  
-                        <input value="${blogPost.title}" id="title" type="text" class="validate">
+                        <input value="${blogPost.title}" id="title-${blogPost.id}" type="text" class="validate">
                         <label class="active" for="title">title</label>
     
-                        <input value="${blogPost.body}" id="body" type="text" class="validate">
+                        <input value="${blogPost.body}" id="body-${blogPost.id}" type="text" class="validate">
                         <label class="active" for="body">body</label>
                          <br>
-                        <button style = "margin-left: 5rem" class="btn waves-effect waves-light" type="submit" name="action">Update Post
+                        <button id="button-${blogPost.id}" style = "margin-left: 5rem" class="btn waves-effect waves-light" type="submit" name="action">Update Post
                         <i class="material-icons right">send</i>
                         </button>
     
@@ -60,6 +60,7 @@ $(document).ready(() => {
         blogPostsEl.append(newPost);
       });
 
+      console.log("children", $("#blog-posts").children());
       M.Modal.init(document.querySelectorAll(".modal"));
     });
     // .catch(handleLoginErr());
@@ -72,11 +73,15 @@ $(document).ready(() => {
   $(document).on("submit", ".update-blogPost-form", (event) => {
     event.preventDefault();
     console.log("I HEAR YOU'RE TRYING TO UPDATE A POST");
+    // const blogId = $(this).attr("id").split("-")[1];
+    const blogId = event.currentTarget.dataset.id;
+    console.log("blogId", blogId);
+
     const updateQuery = {
-      title: $("#title").val(),
-      body: $("#body").val(),
+      title: $(`#title-${blogId}`).val(),
+      body: $(`#body-${blogId}`).val(),
       // eslint-disable-next-line camelcase
-      blogPost_id: event.currentTarget.dataset.id,
+      blogPost_id: blogId,
     };
     console.log("updateQuery", updateQuery);
 
@@ -85,7 +90,7 @@ $(document).ready(() => {
     // });
 
     $.ajax("/api/blogposts", { method: "PUT", data: updateQuery }).then(() => {
-      window.location.replace("/dashboard");
+      window.location.reload();
     });
   });
 });

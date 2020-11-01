@@ -19,6 +19,7 @@ $(document).ready(() => {
       $("#last_name").text = userData.lastName;
       $("#username").text = userData.username;
       $("#email").text = userData.email;
+      localStorage.setItem("id", userData.id);
     });
   }
 
@@ -34,7 +35,7 @@ $(document).ready(() => {
     //       results.
     //   })
 
-    $.ajax("/api/users/", { method: "PUT", data: updateQuery }).then(() => {
+    $.ajax("/api/users/" + localStorage.getItem("id"), { method: "PUT", data: updateQuery }).then(() => {
       window.location.replace("/dashboard");
     });
   });
