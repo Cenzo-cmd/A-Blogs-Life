@@ -42,8 +42,8 @@ $(document).ready(() => {
       })
       .catch(handleLoginErr);
 
-    emailInput.val("");
-    passwordInput.val("");
+    email.val("");
+    password.val("");
   });
 
   function handleLoginErr(err) {
