@@ -1,0 +1,52 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/dashboard" class="brand-logo center">Find Friends</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+            <li><a href="/dashboard">My Dashboard</a></li>
+            <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+    <li><a href="/findFriends">Find Friends</a></li>
+    <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+</ul>
+
+{{#each usersInfo}}
+<div class="container">
+    <div class="row">
+        <div class="card blue-grey darken-1 col m10">
+            <div class="card-content white-text">
+                <span class="card-title"></span>
+                <h4>{{this.dataValues.firstName}} {{this.dataValues.lastName}}</h4>
+                <p>Username: {{this.dataValues.username}}</p>
+                <br>
+                <button id="add-{{this.dataValues.id}}" data-value="{{this.dataValues.id}}"
+                    style="margin-left: 5rem" class="btn waves-effect waves-light addFriend"
+                    type="submit" name="action">Add
+                    Friend
+                    <i class="material-icons right">person_add</i>
+                </button>
+                <button id="view-{{this.dataValues.id}}" data-value="{{this.dataValues.id}}"
+                    style="margin-left: 5rem" class="btn waves-effect waves-light viewProfile"
+                    type="submit" name="action">View Profile
+                    <i class="material-icons right">pageview</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="/assets/js/findFriends.js"></script>
