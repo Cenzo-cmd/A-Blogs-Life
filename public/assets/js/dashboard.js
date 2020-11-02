@@ -30,6 +30,21 @@ $(document).ready(() => {
                 <span class="card-title">${blogPost.title}</span>
                 <p>${blogPost.body}</p>
             </div>
+            <div class="card-action">
+                <form class="col s12">
+                  <div class="row">
+                    <section id="comments" class="col s12 m12">
+                    </section>
+                    <div class="input-field col s10">
+                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                      <label for="textarea1">Comment</label>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </form>
+            </div>
         </div>
         <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
     
