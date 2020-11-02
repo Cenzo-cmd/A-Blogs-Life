@@ -1,19 +1,26 @@
 <nav>
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">Create A New Post</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
-                class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="/dashboard">Profile</a></li>
+            <li class="goto-dashboard"><a href="/dashboard">Dashboard</a></li>
+            <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+            <li><a href="/feed">All Posts</a></li>
+            <li><a href="/findFriends">Find Friends</a></li>
             <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+
         </ul>
     </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="/dashboard">Profile</a></li>
+    <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+    <li><a href="/feed">All Posts</a></li>
+    <li><a href="/findFriends">Find Friends</a></li>
     <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
 </ul>
+
+
 
 
 <div class="container">
@@ -33,8 +40,7 @@
                     <label for="textarea1">Content</label>
                 </div>
             </div>
-            <button class="btn waves-effect waves-light newPostButton" type="submit"
-                name="action">Submit
+            <button class="btn waves-effect waves-light newPostButton" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
             </button>
         </form>
@@ -42,8 +48,7 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
 </script>
