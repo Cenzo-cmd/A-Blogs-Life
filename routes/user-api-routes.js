@@ -13,18 +13,16 @@ module.exports = (app) => {
     app.post("/api/signup", (request, response) => {
         const { email, password, username, firstName, lastName } = request.body;
         db.User.create({
-                firstName,
-                lastName,
-                username,
-                email,
-                password,
-            })
-            .then(() => {
-                response.redirect(307, "/api/login");
-            })
-            .catch((err) => {
-                response.status(401).json(err);
-            });
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
+        }).then(() => {
+            response.redirect(307, "/api/login");
+        }).catch((err) => {
+            response.status(401).json(err);
+        });
     });
 
     ////////// R - Read - Get one or all  Users
@@ -47,9 +45,7 @@ module.exports = (app) => {
         // "include" in findOne will join,
         // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
         db.User.findOne({
-            where: {
-                id: request.user.id,
-            },
+            where: { id: request.user.id, },
             //TODO: Why is it only returning one?
             include: [db.BlogPost],
         }).then((dbUser) => {
@@ -62,9 +58,7 @@ module.exports = (app) => {
         // "include" in findOne will join,
         // equivalent of SELECT * FROM users LEFT OUTER JOIN blogposts ON users.id = blogposts.user_id WHERE id = ${request.params.id} LIMIT 1;
         db.User.findOne({
-            where: {
-                id: request.params.id,
-            },
+            where: { id: request.params.id, },
             //TODO: Make sure this works AAS
             include: [db.BlogPost],
         }).then((dbUser) => {
@@ -74,21 +68,15 @@ module.exports = (app) => {
 
     ////////// U - Update - TODO: Does that mean change user information? Profile? Or is this login?
     // Update user password
-    app.put(
-        "/api/users/:id",
-        (request, response) => {
+    app.put("/api/users/:id", (request, response) => {
             // if (request.user.id === request.params.id) {
             db.User.update(request.body, {
-                    where: {
-                        id: request.params.id,
-                    },
-                })
-                .then((result) => {
-                    response.json(result);
-                })
-                .catch((err) => {
-                    response.json(err);
-                });
+                where: { id: request.params.id, },
+            }).then((result) => {
+                response.json(result);
+            }).catch((err) => {
+                response.json(err);
+            });
         }
         // else {
         //   response.redirect("/dashboard");
@@ -98,18 +86,14 @@ module.exports = (app) => {
     ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
     // delete user
     app.delete("/profile/:id", (request, response) => {
-        console.log(request.params);
+        // console.log(request.params);
         db.User.destroy({
-                where: {
-                    id: request.params.id,
-                },
-            })
-            .then((result) => {
-                response.json({ id: result });
-            })
-            .catch((err) => {
-                response.status(401).json(err);
-            });
+            where: { id: request.params.id, },
+        }).then((result) => {
+            response.json({ id: result });
+        }).catch((err) => {
+            response.status(401).json(err);
+        });
     });
 
     //logout
@@ -118,12 +102,27 @@ module.exports = (app) => {
         response.redirect("/");
     });
 
+    app.get("/dashboard/:id", isAuthenticated, (request, response) => {
+        db.User.findOne({
+            where: { id: request.params.id },
+        }).then(result => {
+
+            response.render("userProfile", result);
+        }).catch((err) => {
+            response.json(err);
+        });
+    });
+
     app.get("/findFriends", isAuthenticated, (request, response) => {
         db.User.findAll().then((result) => {
+            const loggedInUserId = request.user.id;
+            const fileteredUser = result.filter(user => user.dataValues.id !== loggedInUserId);
             const userInfo = {
-                usersInfo: result
+                usersInfo: fileteredUser
             };
             response.render("findFriends", userInfo);
+        }).catch((err) => {
+            response.json(err);
         });
     });
 };

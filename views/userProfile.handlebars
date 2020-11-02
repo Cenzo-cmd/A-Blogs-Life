@@ -1,0 +1,54 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/dashboard" class="brand-logo center">Find Friends</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+            <li><a href="/dashboard">My Dashboard</a></li>
+            <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+    <li><a href="/findFriends">Find Friends</a></li>
+    <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+</ul>
+
+{{userInfo}}
+<h1>***user profile*** work in progress</h1>
+<div style="margin-bottom:3rem" class="col s12 m12">
+    <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
+    <div class="card">
+        {{!-- <div class="card-image">
+                        <img src="https://placeimg.com/640/480/any">
+                        <span class="card-title">Card Title</span>
+                    </div> --}}
+        <div class="card-content">
+            <h3>{{this.dataValues.firstName}} {{this.dataValues.lastName}}'s Profile!</h3>
+        </div>
+        {{!-- <div class="card-action">
+            <a href="/dashboard/newpost">Create a new post</a>
+        </div>
+        <div class="card-action">
+            <a href="#blog-posts">View all your posts</a>
+        </div>
+        <div class="card-action">
+            <a href="/dashboard/updateProfile">Edit Profile</a>
+        </div> --}}
+    </div>
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{{!-- <script src="/assets/js/userProfile.js"></script> --}}

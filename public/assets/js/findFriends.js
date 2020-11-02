@@ -2,14 +2,18 @@ $(document).ready(() => {
     //  This is the add friend button
     $(".addFriend").on("click", event => {
         event.preventDefault();
-        console.log('clicked');
+        //working
 
     });
 
     // This is the view profile button
-    $(".viewProfile").on("click", event => {
+    //DO NOT CHAGE TO ARROW FUNCTION!!!  Using this
+    $(".viewProfile").on("click", function(event) {
+        console.log(this);
         event.preventDefault();
-        console.log("clicked this on");
+        const userId = $(this).data("value");
+
+        window.location.replace("/dashboard/" + userId);
     });
 
 });
