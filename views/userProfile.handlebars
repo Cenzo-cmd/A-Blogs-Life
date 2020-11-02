@@ -18,10 +18,7 @@
     <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
 </ul>
 
-
-
 <div style="margin-bottom:3rem" class="col s12 m12">
-    <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
     <div class="card">
     </div>
 </div>
@@ -38,6 +35,16 @@
                 <p>{{this.dataValues.body}}</p>
                 <br>
                 <p>Created: {{this.dataValues.createdAt}}</p>
+                <br>
+                <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
+                    class="btn waves-effect waves-light likeButton" type="submit" name="action">Like
+                    <i class="material-icons right">thumb_up</i>
+                </button>
+                <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
+                    class="btn waves-effect waves-light commentButton" type="submit"
+                    name="action">Comment
+                    <i class="material-icons right">comment</i>
+                </button>
             </div>
         </div>
     </div>
@@ -45,16 +52,9 @@
 {{/each}}
 
 
-
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-{{!-- <script src="/assets/js/userProfile.js"></script> --}}
+<script src="/assets/js/userProfile.js"></script>

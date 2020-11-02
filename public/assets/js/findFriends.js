@@ -9,7 +9,6 @@ $(document).ready(() => {
     // This is the view profile button
     //DO NOT CHAGE TO ARROW FUNCTION!!!  Using this
     $(".viewProfile").on("click", function(event) {
-        console.log(this);
         event.preventDefault();
         const userId = $(this).data("value");
 
