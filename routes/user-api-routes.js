@@ -105,9 +105,14 @@ module.exports = (app) => {
     app.get("/dashboard/:id", isAuthenticated, (request, response) => {
         db.User.findOne({
             where: { id: request.params.id },
+            include: [db.BlogPost],
         }).then(result => {
-
-            response.render("userProfile", result);
+            const blogPosts = result.dataValues.BlogPosts;
+            const userInfo = {
+                result,
+                blogs: blogPosts
+            };
+            response.render("userProfile", userInfo);
         }).catch((err) => {
             response.json(err);
         });
