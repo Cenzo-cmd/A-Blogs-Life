@@ -26,6 +26,22 @@ module.exports = (app) => {
       });
   });
 
+  // Create a new comment on a blogpost
+  app.post("/api/BlogPosts/comments", (request, response) => {
+    const { body } = request.body;
+    const newComment = {
+      body,
+      UserID: request.user.id
+    };
+    db.BlogPost.create(newComment)
+      .then((result) => {
+        response.status(201).json(result);
+      })
+      .catch((err) => {
+        response.status(400).json(err);
+      });
+  });
+
   ////////// R - Read - Get one or all posts //TODO: pretty sure we can delete all of this
   //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
   // app.get("/api/BlogPosts", (request, response) => {
