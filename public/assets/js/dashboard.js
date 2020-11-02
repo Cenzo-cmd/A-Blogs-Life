@@ -35,6 +35,10 @@ $(document).ready(() => {
     
             <a id="testTrigger" data-postID="${blogPost.id}" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger"
                 href="#modal${blogPost.id}">Edit Post</a>
+
+                <button style = "margin-top:3rem" id="delete-post-${blogPost.id}" data-postID="${blogPost.id}"  
+                class="waves-effect waves-light btn delete-post-btn">Delete  <i class="material-icons trash"></button>
+
             <div id="modal${blogPost.id}" class="modal">
                 <div class="modal-content">
     
@@ -85,11 +89,18 @@ $(document).ready(() => {
     };
     console.log("updateQuery", updateQuery);
 
-    // $.put("/api/blogposts", updateQuery, (results) => {
-    //   window.location.replace("/dashboard");
-    // });
-
     $.ajax("/api/blogposts", { method: "PUT", data: updateQuery }).then(() => {
+      window.location.reload();
+    });
+  });
+
+  // //event listener for "DELETE post" buttons
+  $(document).on("click", ".delete-post-btn", (event) => {
+    event.preventDefault();
+    console.log("I HEAR YOU'RE TRYING TO DELETE A POST");
+    const blogId = event.currentTarget.dataset.postid;
+
+    $.ajax("api/BlogPosts/" + blogId, { method: "DELETE" }).then(() => {
       window.location.reload();
     });
   });
