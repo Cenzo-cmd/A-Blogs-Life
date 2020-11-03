@@ -113,8 +113,9 @@ module.exports = (app) => {
     app.get("/dashboard/:id", isAuthenticated, (request, response) => {
         db.User.findOne({
             where: { id: request.params.id },
-            include: [db.BlogPost],
+            include: [db.BlogPost, db.Comment],
         }).then(result => {
+            console.log("%%%%%%%%", result);
             const blogPosts = result.dataValues.BlogPosts;
             const userInfo = {
                 result,

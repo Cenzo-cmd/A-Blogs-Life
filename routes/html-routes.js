@@ -20,7 +20,8 @@ module.exports = (app) => {
 
         db.User.findOne({
             where: { id: request.user.id },
-            include: [db.BlogPost],
+            include: [db.BlogPost]
+
         }).then(result => {
             const blogPosts = result.dataValues.BlogPosts;
 

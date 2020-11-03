@@ -93,10 +93,12 @@ module.exports = (app) => {
 
         const newComment = {
             commentBody: request.body.value,
-            UserId: request.user.id
+            BlogPostId: request.body.postId,
+            UserId: request.user.id,
+
         };
 
-        db.Comment.create(newComment).then(() => {
+        db.Comment.create(newComment).then((result) => {
             response.status(201).json(result);
         });
 
