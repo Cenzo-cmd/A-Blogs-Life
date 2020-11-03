@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const newCommentForm = $("#comments");
+    const newCommentForm = $(".new-comment-form");
     $(".sidenav").sidenav(); // Materialize functionality for sidenav
     $(".tabs").tabs(); // Materialize functionality for tabs on profile
     // $('#textarea1').val('New Text');
@@ -9,9 +9,9 @@ $(document).ready(function () {
     newCommentForm.on("submit", (event) => {
       console.log(this);
       event.preventDefault();
-      console.log("clicked");
+      console.log("clicked on submit comment");
       const newComment = {
-        body: $("#textarea1").val().trim(),
+        body: $(".comment-input").val().trim(),
       };
       console.log(newComment);
       $.ajax("/api/BlogPosts/comments", {

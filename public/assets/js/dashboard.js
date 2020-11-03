@@ -31,12 +31,12 @@ $(document).ready(() => {
                 <p>${blogPost.body}</p>
             </div>
             <div class="card-action">
-                <form class="col s12">
+                <form class="col s12 new-comment-form">
                   <div class="row">
                     <section id="comments" class="col s12 m12">
                     </section>
                     <div class="input-field col s10">
-                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                      <textarea id="textarea1" class="white-text materialize-textarea comment-input"></textarea>
                       <label for="textarea1">Comment</label>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Submit
