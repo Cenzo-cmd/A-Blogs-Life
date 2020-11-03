@@ -6,10 +6,14 @@ $(document).ready(() => {
         console.log(this);
         const postToLikeID = this.dataset.value;
         console.log(postToLikeID);
-        $.ajax("/api/blogposts/like", {
+        const data = {
+            BlogPostId: postToLikeID
+        };
+        $.ajax("/api/BlogPosts/like", {
             method: "POST",
+            data
             // value: true,
-            BlogPostId: postToLikeID,
+            // BlogPostId: postToLikeID,
             // UserID: request.user.id
         }).then(() => {
             window.location.reload();
