@@ -35,18 +35,22 @@
             <div class="card-content white-text">
                 <span class="card-title">{{this.dataValues.title}}</span>
                 <br>
-                <p>{{this.dataValues.body}}</p>
+                <p>{{this.dataValues.body}} {{this.dataValues.body}}</p>
                 <br>
                 <p>Created: {{this.dataValues.createdAt}}</p>
                 <br>
                 <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
                     class="btn waves-effect waves-light likeButton" type="submit" name="action">Like
-                    <i class="material-icons right">thumb_up</i>
+                    <i class="material-icons right">thumb_up</i> ( {{likesCount}} )
                 </button>
                 <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
                     class="btn waves-effect waves-light commentButton" type="submit" name="action">Comment
                     <i class="material-icons right">comment</i>
                 </button>
+
+
+
+                </section>
             </div>
         </div>
     </div>
