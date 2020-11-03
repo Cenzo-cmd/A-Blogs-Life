@@ -1,9 +1,16 @@
 $(document).ready(() => {
     //  This is the add friend button
-    $(".addFriend").on("click", event => {
+    $(".addFriend").on("click", function(event) {
         event.preventDefault();
-        //working
-
+        const followId = $(this).data("value");
+        console.log("Current user id: ", localStorage.getItem("id"));
+        
+        // TODO: add this friend to currentUser following array
+        $.ajax("/addFriend/" + followId, {
+            method: "POST"
+        }).then((result) => {
+            console.log("Current user now follows: " + followId);
+        });
     });
 
     // This is the view profile button
