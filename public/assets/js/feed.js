@@ -15,16 +15,16 @@ $(document).ready(function () {
         posts = user.BlogPosts; // TODO: Add functionality so posts populate in feed by most recent (filter options?)
         posts.forEach((post) => {
           const feed = `
-                    <div class="row" id="blogpost-${post.id}">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title">${post.title}</span>
-                                <p>${post.body}</p>
-                                <p>by ${user.username}</p>
-                            </div>
-                        </div>
-                    </div>
-                    `;
+                      <div class="row" id="blogpost-${post.id}">
+                          <div class="card">
+                              <div class="card-content">
+                                  <span class="card-title">${post.title}</span>
+                                  <p>${post.body}</p>
+                                  <p>by ${user.username}</p>
+                              </div>
+                          </div>
+                      </div>
+                      `;
 
           feedContainer.append(feed);
         });

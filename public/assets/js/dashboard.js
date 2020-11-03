@@ -1,73 +1,39 @@
 $(document).ready(() => {
-  $(".sidenav").sidenav(); // Materialize functionality for sidenav
-  $(".tabs").tabs(); // Materialize functionality for tabs on profile
+    $(".sidenav").sidenav(); // Materialize functionality for sidenav
+    $(".tabs").tabs(); // Materialize functionality for tabs on profile
 
-  //Where blog posts live on the page
-  const blogPostsEl = $("#blog-posts");
+    document.title = "It's a Blog's Life";
 
-  //unused function right now
-  // function handleLoginErr(err) {
-  //   $("#alert .msg").text(err.responseJSON);
-  //   $("#alert").fadeIn(500);
-  // }
+    M.Modal.init(document.querySelectorAll(".modal"));
+    $(".modal").modal();
+    M.updateTextFields();
 
-  document.title = "It's a Blog's Life";
-  populateBlogPosts();
+    // //event listener for "submit post edits" buttons
+    $(document).on("submit", ".update-blogPost-form", (event) => {
+        event.preventDefault();
+        // const blogId = $(this).attr("id").split("-")[1];
+        const blogId = event.currentTarget.dataset.id;
 
-  //grab blog posts associated with this user and render them on the page as cards
-  //TODO: does this need try/catch?
-  function populateBlogPosts() {
-    console.log("I'm populating blog posts!");
-    $.get("/api/blogposts/", (data) => {
-      console.log(data);
-      data.forEach((blogPost) => {
-        const newPost = `
-        <div class="row" id="blog-post-${blogPost.id}">
-        <div class="card blue-grey darken-1 col m10">
-            <div class="card-content white-text">
-                <span class="card-title">${blogPost.title}</span>
-                <p>${blogPost.body}</p>
-            </div>
-        </div>
-        <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
+        const updateQuery = {
+            title: $(`#title-${blogId}`).val(),
+            body: $(`#body-${blogId}`).val(),
+            // eslint-disable-next-line camelcase
+            blogPost_id: blogId,
+        };
+        console.log("updateQuery", updateQuery);
 
-            <a id="testTrigger" data-target="modal${blogPost.id}" class="waves-effect waves-light btn modal-trigger" href="#modal${blogPost.id}">Edit Post</a>
-            <div id="modal${blogPost.id}" class="modal">
-                <div class="modal-content">
-                    <h4>${blogPost.title}</h4>
-                    <p>${blogPost.body}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-            `;
-        blogPostsEl.append(newPost);
-      });
-
-      // const elems = document.querySelectorAll(".modal"); // elems is not being called anywhere
-      // const instances = M.Modal.init(elems); // instances is not being called anywhere
+        $.ajax("/api/blogposts", { method: "PUT", data: updateQuery }).then(() => {
+            window.location.reload();
+        });
     });
-    // .catch(handleLoginErr());
-  }
-  // $(document).on("click", "#testTrigger", (event) => {
-  //   console.log("YOU CLICKED ME");
-  // });
 
-  $(".modal").modal();
-  // $("#modal1").modal();
+    // //event listener for "DELETE post" buttons
+    $(document).on("click", ".delete-post-btn", (event) => {
+        event.preventDefault();
+        const blogId = event.currentTarget.dataset.postid;
 
-  // <button class="edit-post-button waves-effect waves-light btn" data-blogPostId=${blogPost.id}>Edit Post</button>
-
-  //event listener for "Edit a post" buttons
-  $(document).on("click", ".edit-post-button", (event) => {
-    event.preventDefault();
-
-    const postToEditID = event.currentTarget.dataset.blogpostid;
-    console.log("postToEditID", postToEditID);
-  });
-  // $(document).on("click", ".modal-trigger", (event) => {
-  //   console.log("hiiiiiiiiiiiiiii");
-  //   //Materialize modal event listener
-  //   $(".modal").modal();
-  // });
+        $.ajax("api/BlogPosts/" + blogId, { method: "DELETE" }).then(() => {
+            window.location.reload();
+        });
+    });
 });
