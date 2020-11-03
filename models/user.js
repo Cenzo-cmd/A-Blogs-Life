@@ -46,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
 
     User.associate = (db) => {
         User.hasMany(db.BlogPost, { onDelete: "cascade" });
+        User.hasMany(db.Like, { onDelete: "cascade" });
         User.belongsToMany(User, { as: "Friend", through: "UserFriends" }); // Create table UserFriends that stores ids of objects
     };
 

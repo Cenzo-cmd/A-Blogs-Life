@@ -26,6 +26,18 @@ module.exports = (app) => {
             });
     });
 
+    // Create new like
+    app.post("/api/BlogPosts/like", (request, response) => {
+      const newLike = {
+        value: true,
+        BlogPostID: request.body.postID,
+        UserID: request.user.id
+      };
+      db.Like.create(newLike).then((result) => {
+        response.status(201).json(result);
+      });
+    });
+
     ////////// R - Read - Get one or all posts //TODO: pretty sure we can delete all of this
     //GET ALL blogPosts associated with a particular user, the user ID must be passed in the REQUEST BODY
     // app.get("/api/BlogPosts", (request, response) => {

@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
 
   BlogPost.associate = (db) => {
     BlogPost.belongsTo(db.User, { foreignKey: { allowNull: false } });
+    BlogPost.hasMany(db.Like, { onDelete: "cascade" });
   };
   return BlogPost;
 };
