@@ -88,4 +88,17 @@ module.exports = (app) => {
             })
             .catch((err) => console.log(err));
     });
+
+    app.post("/api/BlogPosts/comment", (request, response) => {
+
+        const newComment = {
+            commentBody: request.body.value,
+            UserId: request.user.id
+        };
+
+        db.Comment.create(newComment).then(() => {
+            response.status(201).json(result);
+        });
+
+    });
 };

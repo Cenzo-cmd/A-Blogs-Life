@@ -1,7 +1,8 @@
 <nav>
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">Find Friends</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li class="goto-dashboard"><a href="/dashboard">Dashboard</a></li>
             <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
@@ -44,17 +45,21 @@
                     <i class="material-icons right">thumb_up</i>
                 </button>
                 <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
-                    class="btn waves-effect waves-light commentButton" type="submit" name="action">Comment
+                    class="btn waves-effect waves-light commentButton" type="submit"
+                    name="action">Comment
                     <i class="material-icons right">comment</i>
                 </button>
             </div>
+            <div class="appendCommentSection{{this.dataValues.id}}"></div>
         </div>
     </div>
 </div>
 {{/each}}
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="/assets/js/userProfile.js"></script>

@@ -17,8 +17,6 @@ module.exports = (app) => {
     });
 
     app.get("/dashboard", isAuthenticated, (request, response) => {
-        // console.log(request.user.id);
-        // console.log("00000000000", request.user);
 
         db.User.findOne({
             where: { id: request.user.id },
@@ -26,17 +24,12 @@ module.exports = (app) => {
         }).then(result => {
             const blogPosts = result.dataValues.BlogPosts;
 
-            console.log("$$$$$$$$$$$$$$", blogPosts);
             const userInfo = {
                 result,
                 blogs: blogPosts
             };
-            console.log("&&&&&&", userInfo);
             response.render("dashboard", userInfo);
         });
-
-
-
     });
 
     app.get("/dashboard/newPost", isAuthenticated, (request, response) => {
