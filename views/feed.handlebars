@@ -1,0 +1,48 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">{{username}}</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+            <li><a href="/feed">All Posts</a></li>
+            <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
+    <li><a href="/feed">All Posts</a></li>
+    <li class="signOutDashboard"><a href="/logout">Sign Out</a></li>
+</ul>
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div id="feed" class="col s12 m6">
+                <!-- TODO: Here is where all the user's lattest posts will go -->
+                <!-- Might have to call in literals with this, especially for data? -->
+                {{#each users}}
+                    <div class="card">
+                        <div class="card-content">
+                            <h2>{{user.blogPost.title}}</h2>
+                            <p>{{user.blogPost.body}}</p>
+                            <p>by {{user}}</p>
+                        </div>
+                    </div>
+                {{/each}}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<!-- Compiled and minified JavaScript -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="/assets/js/feed.js"></script>
