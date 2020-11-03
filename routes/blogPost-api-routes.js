@@ -30,9 +30,11 @@ module.exports = (app) => {
     app.post("/api/BlogPosts/like", (request, response) => {
       const newLike = {
         value: true,
-        BlogPostID: request.body.postID,
-        UserID: request.user.id
+        BlogPostId: request.body.BlogPostId,
+        UserId: request.user.id
       };
+      console.log(request);
+      console.log(newLike);
       db.Like.create(newLike).then((result) => {
         response.status(201).json(result);
       });

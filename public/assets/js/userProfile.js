@@ -7,7 +7,10 @@ $(document).ready(() => {
         const postToLikeID = this.dataset.value;
         console.log(postToLikeID);
         $.ajax("/api/blogposts/like", {
-            method: "POST"
+            method: "POST",
+            // value: true,
+            BlogPostId: postToLikeID,
+            // UserID: request.user.id
         }).then(() => {
             window.location.reload();
         });
