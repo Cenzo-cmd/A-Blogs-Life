@@ -118,6 +118,7 @@ module.exports = (app) => {
     response.redirect("/");
   });
 
+  //userProfile route
   app.get("/dashboard/:id", isAuthenticated, (request, response) => {
     db.User.findOne({
       where: { id: request.params.id },
@@ -125,16 +126,10 @@ module.exports = (app) => {
     })
       .then((result) => {
         const blogPosts = result.dataValues.BlogPosts;
-        console.log("------ blogPosts", blogPosts);
-        const likesCount = result.dataValues.BlogPosts[0].dataValues.Likes.length;
-        console.log("likesCount", likesCount);
-
         const userInfo = {
           result,
           blogs: blogPosts,
-          likesCount,
         };
-        console.log("-------------------------------userInfo", userInfo);
         response.render("userProfile", userInfo);
       })
       .catch((err) => {
