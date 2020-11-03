@@ -1,23 +1,20 @@
 $(document).ready(() => {
-
-    //Do NOT change to arrow functions!
-    $(".likeButton").on("click", function(event) {
-        event.preventDefault();
-        console.log(this);
-        const postToLikeID = this.dataset.value;
-        console.log(postToLikeID);
-        $.ajax("/api/blogposts/like", {
-            method: "POST",
-            // value: true,
-            BlogPostId: postToLikeID,
-            // UserID: request.user.id
-        }).then(() => {
-            window.location.reload();
-        });
+  //Do NOT change to arrow functions!
+  $(".likeButton").on("click", function (event) {
+    event.preventDefault();
+    const postToLikeID = this.dataset.value;
+    const updateQuery = { postToLikeID };
+    $.ajax("/api/BlogPosts/like", {
+      method: "POST",
+      // value: true,
+      data: updateQuery,
+    }).then(() => {
+      window.location.reload();
     });
+  });
 
-    $(".commentButton").on("click", function(event) {
-        event.preventDefault();
-        console.log(this);
-    });
+  $(".commentButton").on("click", function (event) {
+    event.preventDefault();
+    console.log(this);
+  });
 });
