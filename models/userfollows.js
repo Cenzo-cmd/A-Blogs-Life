@@ -1,4 +1,6 @@
+/* eslint-disable camelcase */
 module.exports = function (sequelize, DataTypes) {
+
     const UserFollows = sequelize.define("UserFollows", {
         // eslint-disable-next-line camelcase
         following_id: {
@@ -13,3 +15,4 @@ module.exports = function (sequelize, DataTypes) {
     });   
     return UserFollows;
 };
+
