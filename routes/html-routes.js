@@ -30,13 +30,11 @@ module.exports = (app) => {
         {
           model: db.User,
           as: "following",
-
           include: [{ model: db.BlogPost, include: [db.User, db.Like, db.Comment] }],
         },
         {
           model: db.User,
           as: "follower",
-
           include: [{ model: db.BlogPost, include: [db.User, db.Like, db.Comment] }],
         },
       ],

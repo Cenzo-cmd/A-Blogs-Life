@@ -8,7 +8,7 @@ $(document).ready(() => {
     $.ajax("/addFriend/" + followId, {
       method: "POST",
     }).then((result) => {
-      // console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
+      console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
       // TODO: Disable button once following
     });
   });
