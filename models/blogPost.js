@@ -1,6 +1,6 @@
 // const { DataTypes } = require("sequelize/types");
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const BlogPost = sequelize.define("BlogPost", {
     title: {
       type: DataTypes.STRING,
@@ -19,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
   BlogPost.associate = (db) => {
     BlogPost.belongsTo(db.User, { foreignKey: { allowNull: false } });
     BlogPost.hasMany(db.Like, { onDelete: "cascade" });
+    BlogPost.hasMany(db.Comment, { onDelete: "cascade" });
   };
   return BlogPost;
 };

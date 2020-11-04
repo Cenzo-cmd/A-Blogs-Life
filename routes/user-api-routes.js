@@ -118,18 +118,34 @@ module.exports = (app) => {
     response.redirect("/");
   });
 
+  // route for comments
+  app.post("/api/BlogPosts/comment", (request, response) => {
+    const newComment = {
+      commentBody: request.body.value,
+      BlogPostId: request.body.postId,
+      UserId: request.user.id,
+    };
+    db.Comment.create(newComment).then((result) => {
+      response.status(201).json(result);
+    });
+  });
+
   //userProfile route
   app.get("/dashboard/:id", isAuthenticated, (request, response) => {
     db.User.findOne({
       where: { id: request.params.id },
-      include: [{ model: db.BlogPost, include: [db.Like] }],
+      include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
     })
       .then((result) => {
         const blogPosts = result.dataValues.BlogPosts;
+
+        console.log("#####################result.dataValues", result.dataValues);
+        console.log("&&&&&&&&&&&&&&&result.dataValues.Comments[0].dataValues", result.dataValues.BlogPosts[0].dataValues);
         const userInfo = {
           result,
           blogs: blogPosts,
         };
+        // console.log("result -----------------------", userInfo);
         response.render("userProfile", userInfo);
       })
       .catch((err) => {
