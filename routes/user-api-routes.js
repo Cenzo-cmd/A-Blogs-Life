@@ -36,7 +36,6 @@ module.exports = (app) => {
   });
 
   ////////// R - Read - Get one or all  Users
-
   //Get ALL Users AND their associated BlogPosts
   //TODO: change this to all users? is that RESTful?
   app.get("/api/users", (request, response) => {
@@ -44,7 +43,17 @@ module.exports = (app) => {
     //  equivalent of  SELECT * FROM Users LEFT OUTER JOIN BlogPosts ON Users.id = BlogPosts.user_id;
     db.User.findAll({
       //TODO: Make sure this works AAS
-      include: [db.BlogPost],
+      include: [
+        db.BlogPost,
+        {
+          model: db.User,
+          as: "following",
+        },
+        {
+          model: db.User,
+          as: "follower",
+        },
+      ],
     }).then((dbUser) => {
       response.json(dbUser);
     });
@@ -163,6 +172,30 @@ module.exports = (app) => {
           usersInfo: fileteredUser,
         };
         response.render("findFriends", userInfo);
+      })
+      .catch((err) => {
+        response.json(err);
+      });
+  });
+
+  //             const userInfo = {
+  //                 usersInfo: fileteredUser
+  //             };
+  //             response.render("findFriends", userInfo);
+  //         }).catch((err) => {
+  //             response.json(err);
+  //         });
+  //     });
+
+  app.post("/addFriend/:id", isAuthenticated, (request, response) => {
+    const newFollow = {
+      following_id: request.params.id,
+      follower_id: request.user.id,
+    };
+
+    db.UserFollows.create(newFollow)
+      .then((result) => {
+        response.json(result);
       })
       .catch((err) => {
         response.json(err);
