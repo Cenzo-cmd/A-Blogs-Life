@@ -1,0 +1,97 @@
+body {
+    background-color: #EBDEC2;
+}
+
+nav .brand-logo {
+    color: #FFFBEB;
+}
+
+nav li a {
+    color: #FFFBEB;
+}
+
+.nav-wrapper {
+    background-color: #687E8D;
+}
+
+.sidenav {
+    background-color: #EBDEC2;
+}
+
+.input-field input[type=text]:focus, .input-field input[type=email]:focus, .input-field input[type=password]:focus, .input-field .materialize-textarea {
+    border-bottom: 1px solid #687E8D !important;
+    box-shadow: 0 1px 0 0 #687E8D !important;
+}
+
+.input-field label {
+    color: #687E8D !important;
+}
+
+.btn {
+    background-color: #806F5B;
+    color: #FFFBEB;
+}
+
+.btn:hover {
+    background-color: #687E8D;
+}
+
+.card {
+    background-color: #687E8D;
+}
+
+.card-content {
+    color: #FFFBEB;
+}
+
+/* dashboard specific styles */
+
+#user-profile {
+    background-color: #FFFBEB;
+}
+
+#user-profile .card-content {
+    color: black;
+}
+
+#other-posts .card {
+    background-color: #FFFBEB;
+}
+
+#other-posts .card-content {
+    color: black;
+}
+
+.input-field input[type=email]:focus, .input-field input[type=password]:focus {
+    border-bottom: 1px solid #687E8D !important;
+    box-shadow: 0 1px 0 0 #687E8D !important;
+}
+
+.modal {
+    background-color: #FFFBEB;
+}
+
+.update-blogPost-form label {
+    color: #687E8D !important;
+}
+
+.update-blogPost-form input[type=text]:focus {
+    border-bottom: 1px solid #687E8D !important;
+    box-shadow: 0 1px 0 0 #687E8D !important;
+}
+
+/* newPost specific styles */
+
+.input-field .prefix.active {
+    color: #687E8D;
+}
+
+/* feed specific styles */
+
+#feed .card {
+    background-color: #FFFBEB;
+}
+
+#feed .card-content {
+    color: black;
+}

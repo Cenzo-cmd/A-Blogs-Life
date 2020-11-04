@@ -26,7 +26,7 @@
 
             <div style="margin-bottom:3rem" class="col s12">
                 <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
-                <div class="card">
+                <div class="card" id="user-profile">
                     {{!-- <div class="card-image">
                         <img src="https://placeimg.com/640/480/any">
                         <span class="card-title">Card Title</span>
@@ -38,13 +38,13 @@
                             {{this.result.dataValues.lastName}}!</h3>
 
                     </div>
-                    <div class="card-action">
+                    <div class="card-action hoverable">
                         <a href="/dashboard/newpost">Create a new post</a>
                     </div>
-                    <div class="card-action">
+                    <div class="card-action hoverable">
                         <a href="#blog-posts">View all your posts</a>
                     </div>
-                    <div class="card-action">
+                    <div class="card-action hoverable">
                         <a href="/dashboard/updateProfile">Edit Profile</a>
                     </div>
                 </div>
@@ -55,14 +55,14 @@
                 <h4>Your Blog Posts:</h4>
                 {{#each blogs}}
                 <div class="row" id="blog-post-{{this.dataValues.id}}">
-                    <div class="card blue-grey darken-1 col s12 m9">
-                        <div class="card-content white-text">
+                    <div class="card col s12">
+                        <div class="card-content">
                             <span class="card-title">{{this.dataValues.title}}</span>
                             <p>{{this.dataValues.body}}</p>
                         </div>
                     </div>
-                    <div class="col s12 m3" style="margin-top: 7.5px;">
-                        <div class="row">
+                    {{!-- <div class="col s12 m3" style="margin-top: 7.5px;"> --}}
+                        {{!-- <div class="row">
                             <a id="testTrigger" data-postID="{{this.dataValues.id}}"
                                 data-target="modal{{this.dataValues.id}}"
                                 class="col s8 offset-s2 waves-effect waves-light btn modal-trigger"
@@ -108,6 +108,54 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div> --}}
+                </div>
+                {{!-- Edit/Delete Buttons live below each blogpost --}}
+                <div class="row">
+                    <a id="testTrigger" data-postID="{{this.dataValues.id}}"
+                                data-target="modal{{this.dataValues.id}}"
+                                class="col s8 offset-s2 waves-effect waves-light btn modal-trigger"
+                                href="#modal{{this.dataValues.id}}">Edit <i class="material-icons">edit</i></a>
+
+                    <button style="margin-top:1.5rem" id="delete-post-{{this.dataValues.id}}"
+                        data-postID="{{this.dataValues.id}}"
+                        class="col s8 offset-s2 waves-effect waves-light btn delete-post-btn">Delete
+                        <i class="material-icons ">delete</i>
+                    </button>
+                </div>
+                {{!-- Modal section for each edit button --}}
+                <div id="modal{{this.dataValues.id}}" class="modal">
+                    <div class="modal-content">
+
+                        <form class="update-blogPost-form" data-id={{this.dataValues.id}}>
+
+                            <label class="active" for="title">title</label>
+                            <input value="{{this.dataValues.title}}" id="title-{{this.dataValues.id}}"
+                                type="text" class="validate">
+
+                            <label class="active" for="body">body</label>
+                            <input value="{{this.dataValues.body}}" id="body-{{this.dataValues.id}}"
+                                type="text" class="validate">
+                            <br>
+                            <br>
+                            <div class="row center">
+                                <button id="button-{{this.dataValues.id}}"
+                                    class="btn waves-effect waves-light" type="submit" name="action">Update
+                                    Post
+                                    <i class="material-icons right">send</i>
+                                </button>
+
+
+                            </div>
+
+                        </form>
+                        <div class="row center">
+                            <button id="close-modal-button-{{this.dataValues.id}}"
+                                class=" align-center close-modal-button btn waves-effect waves-light">Close
+                                without Saving
+                                <i class="material-icons right">delete</i>
+                            </button>
                         </div>
                     </div>
                 </div>
