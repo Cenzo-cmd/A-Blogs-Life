@@ -40,9 +40,9 @@ $(document).ready(() => {
 
   $(document).on("click", ".commentSubmit", function (event) {
     event.preventDefault();
-    console.log(this);
+    // console.log(this);
     const submitButtonId = $(this).data("value");
-    console.log(submitButtonId);
+    // console.log(submitButtonId);
     const commentBody = $("#textarea1").val().trim();
     const data = {
       value: commentBody,

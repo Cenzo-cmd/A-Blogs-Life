@@ -7,9 +7,9 @@ $(document).ready(function () {
   populateMainFeed();
 
   function populateMainFeed() {
-    console.log("Creating a feed of all posts!");
+    // console.log("Creating a feed of all posts!");
     $.get("/api/users", (data) => {
-      console.log("Data:", data);
+      // console.log("Data:", data);
 
       data.forEach((user) => {
         posts = user.BlogPosts; // TODO: Add functionality so posts populate in feed by most recent (filter options?)

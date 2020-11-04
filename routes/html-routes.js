@@ -24,31 +24,31 @@ module.exports = (app) => {
       where: { id: request.user.id },
       include: [
         {
-          model: db.BlogPost, 
-          include: [db.Like, db.Comment] 
+          model: db.BlogPost,
+          include: [db.Like, db.Comment],
         },
         {
           model: db.User,
           as: "following",
-          include: [{ model: db.BlogPost, include: [db.Like, db.Comment]}]
+          include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
         },
         {
           model: db.User,
           as: "follower",
-          include: [{ model: db.BlogPost, include: [db.Like, db.Comment]}]
-        }
+          include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
+        },
       ],
     }).then((result) => {
       const blogPosts = result.dataValues.BlogPosts;
       const following = result.following;
-      
+
       // console.log("$$$$$$$$$$$$$$", blogPosts);
-      console.log("$$$$$$$$$$$$$$FOLLOWING", following);
+      // console.log("$$$$$$$$$$$$$$FOLLOWING", following);
 
       const userInfo = {
         result,
         blogs: blogPosts,
-        following
+        following,
       };
       //   console.log("&&&&&&", userInfo);
       response.render("dashboard", userInfo);

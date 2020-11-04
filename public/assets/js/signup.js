@@ -13,7 +13,7 @@ $(document).ready(() => {
   // When the signup button is clicked...
   signUpForm.on("submit", (event) => {
     event.preventDefault();
-    console.log(password, reEnterPassword);
+    // console.log(password, reEnterPassword);
 
     if (password.val().trim() !== reEnterPassword.val().trim()) {
       return;
@@ -26,7 +26,7 @@ $(document).ready(() => {
       email: email.val().trim(),
       password: password.val().trim(),
     };
-    console.log(userData);
+    // console.log(userData);
 
     // Email and password are validated to not be blank
     if (!userData.email || !userData.password) {

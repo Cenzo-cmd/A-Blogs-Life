@@ -44,9 +44,9 @@ module.exports = (app) => {
     db.User.findAll({
       //TODO: Make sure this works AAS
       include: [
-        { 
-          model: db.BlogPost, 
-          include: [db.Like, db.Comment] 
+        {
+          model: db.BlogPost,
+          include: [db.Like, db.Comment],
         },
         {
           model: db.User,
@@ -111,10 +111,11 @@ module.exports = (app) => {
 
   ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
-  app.delete("/profile/:id", (request, response) => {
+  app.delete("/profile/", isAuthenticated, (request, response) => {
     // console.log(request.params);
+    // console.log("delete user id-----------------------------------------------", request.user.id);
     db.User.destroy({
-      where: { id: request.params.id },
+      where: { id: request.user.id },
     })
       .then((result) => {
         response.json({ id: result });
@@ -151,8 +152,8 @@ module.exports = (app) => {
       .then((result) => {
         const blogPosts = result.dataValues.BlogPosts;
 
-        console.log("#####################result.dataValues", result.dataValues);
-        console.log("&&&&&&&&&&&&&&&result.dataValues.Comments[0].dataValues", result.dataValues.BlogPosts[0].dataValues);
+        // console.log("#####################result.dataValues", result.dataValues);
+        // console.log("&&&&&&&&&&&&&&&result.dataValues.Comments[0].dataValues", result.dataValues.BlogPosts[0].dataValues);
         const userInfo = {
           result,
           blogs: blogPosts,
@@ -166,7 +167,9 @@ module.exports = (app) => {
   });
 
   app.get("/findFriends", isAuthenticated, (request, response) => {
-    db.User.findAll()
+    db.User.findAll({
+      order: [["lastName", "ASC"]],
+    })
       .then((result) => {
         const loggedInUserId = request.user.id;
         const fileteredUser = result.filter((user) => user.dataValues.id !== loggedInUserId);
