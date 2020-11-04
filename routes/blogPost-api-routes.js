@@ -50,11 +50,11 @@ module.exports = (app) => {
   // user id is passed in from request.user object
   app.get("/api/BlogPosts", (request, response) => {
     const query = {};
-    console.log("this is the user", request.user);
+    // console.log("this is the user", request.user);
     if (request.user) {
       query.UserId = request.user.id;
     }
-    console.log("THIS IS THE QUERY", query);
+    // console.log("THIS IS THE QUERY", query);
     db.BlogPost.findAll({
       where: query,
       /////AAS added likes to this endpoint
