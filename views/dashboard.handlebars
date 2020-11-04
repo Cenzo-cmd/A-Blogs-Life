@@ -1,7 +1,8 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo center">{{firstName}}'s Dashboard</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="#!" class="brand-logo center">{{this.result.dataValues.firstName}}'s Dashboard</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li class="goto-dashboard"><a href="/dashboard">Dashboard</a></li>
             <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
@@ -24,27 +25,6 @@
     <div class="section">
         <div class="row">
 
-            {{!-- dummy  --}}
-            {{!-- <div class="row" id="blog-post-${blogPost.id}">
-                <div class="card blue-grey darken-1 col m10">
-                    <div class="card-content white-text">
-                        <span class="card-title">${blogPost.title}</span>
-                        <p>${blogPost.body}</p>
-                    </div>
-                </div>
-                <div class="col m2" style="padding-top: 3rem">
-                    <!-- Modal Trigger -->
-                    <a class="edit-post-button waves-effect waves-light btn modal-trigger"
-                        data-blogPostId=${blogPost.id} href="#modal1">Modal</a>
-                </div>
-            </div> --}}
-            {{!-- end dummy --}}
-
-
-
-
-
-
             <div style="margin-bottom:3rem" class="col s12 m12">
                 <!-- The dashboard card. TODO: Add handlebars functionality for #each post (once that information is established) -->
                 <div class="card">
@@ -53,7 +33,11 @@
                         <span class="card-title">Card Title</span>
                     </div> --}}
                     <div class="card-content">
-                        <h3>Welcome, {{firstName}} {{lastName}}!</h3>
+                        <img src="http:{{this.result.dataValues.avatar}}" width="100px" alt=""
+                            class="circle responsive-img">
+                        <h3>Welcome, {{this.result.dataValues.firstName}}
+                            {{this.result.dataValues.lastName}}!</h3>
+
                     </div>
                     <div class="card-action">
                         <a href="/dashboard/newpost">Create a new post</a>
@@ -67,20 +51,67 @@
                 </div>
             </div>
 
-
-
             <h4>Your Blog Posts:</h4>
             {{!-- The place where blog posts live --}}
             <section id="blog-posts" class="col s12 m12">
+                {{#each blogs}}
+                <div class="row" id="blog-post-{{this.dataValues.id}}">
+                    <div class="card blue-grey darken-1 col m10">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{this.dataValues.title}}</span>
+                            <p>{{this.dataValues.body}}</p>
+                        </div>
+                    </div>
+                    <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
+
+                        <a id="testTrigger" data-postID="{{this.dataValues.id}}"
+                            data-target="modal{{this.dataValues.id}}"
+                            class="waves-effect waves-light btn modal-trigger"
+                            href="#modal{{this.dataValues.id}}">Edit Post</a>
+
+                        <button style="margin-top:3rem" id="delete-post-{{this.dataValues.id}}"
+                            data-postID="{{this.dataValues.id}}"
+                            class="waves-effect waves-light btn delete-post-btn">Delete
+                            <i class="material-icons trash"></i>
+                        </button>
+
+                        <div id="modal{{this.dataValues.id}}" class="modal">
+                            <div class="modal-content">
+
+                                <form class="update-blogPost-form" data-id={{this.dataValues.id}}>
+
+                                    <input value="{{this.dataValues.title}}"
+                                        id="title-{{this.dataValues.id}}" type="text"
+                                        class="validate">
+                                    <label class="active" for="title">title</label>
+
+                                    <input value="{{this.dataValues.body}}"
+                                        id="body-{{this.dataValues.id}}" type="text"
+                                        class="validate">
+                                    <label class="active" for="body">body</label>
+                                    <br>
+                                    <button id="button-{{this.dataValues.id}}"
+                                        style="margin-left: 5rem"
+                                        class="btn waves-effect waves-light" type="submit"
+                                        name="action">Update Post
+                                        <i class="material-icons right">send</i>
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
             </section>
-
-
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="/assets/js/dashboard.js"></script>

@@ -1,6 +1,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+const gravatar = require("gravatar");
 // const { request, response } = require("express");
 
 module.exports = (app) => {
@@ -12,12 +13,19 @@ module.exports = (app) => {
     ////////// C - Create - Create a new User
     app.post("/api/signup", (request, response) => {
         const { email, password, username, firstName, lastName } = request.body;
+        const avatar = gravatar.url(email, {
+            s: "200",
+            r: "pg",
+            d: "mm"
+        });
+
         db.User.create({
             firstName,
             lastName,
             username,
             email,
             password,
+            avatar,
         }).then(() => {
             response.redirect(307, "/api/login");
         }).catch((err) => {
@@ -34,7 +42,13 @@ module.exports = (app) => {
         //  equivalent of  SELECT * FROM Users LEFT OUTER JOIN BlogPosts ON Users.id = BlogPosts.user_id;
         db.User.findAll({
             //TODO: Make sure this works AAS
-            include: [db.BlogPost],
+            include: [db.BlogPost, {
+                model: db.User,
+                as: "following"
+            }, {
+                model: db.User,
+                as: "follower"
+            }],
         }).then((dbUser) => {
             response.json(dbUser);
         });
@@ -122,10 +136,25 @@ module.exports = (app) => {
         db.User.findAll().then((result) => {
             const loggedInUserId = request.user.id;
             const fileteredUser = result.filter(user => user.dataValues.id !== loggedInUserId);
+
             const userInfo = {
                 usersInfo: fileteredUser
             };
             response.render("findFriends", userInfo);
+        }).catch((err) => {
+            response.json(err);
+        });
+    });
+
+    app.post("/addFriend/:id", isAuthenticated, (request, response) => {
+      
+        const newFollow = {
+            following_id: request.params.id,
+            follower_id: request.user.id
+        };
+
+        db.UserFollows.create(newFollow).then((result) => {
+            response.json(result);
         }).catch((err) => {
             response.json(err);
         });
