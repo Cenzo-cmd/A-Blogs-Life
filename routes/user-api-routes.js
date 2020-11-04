@@ -122,11 +122,15 @@ module.exports = (app) => {
     // }
   );
 
-  ////////// D - Delete (Destroy) - Delete one user
-  app.delete("/profile/:id", (request, response) => {
+
+  ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
+  // delete user
+  app.delete("/profile/", isAuthenticated, (request, response) => {
+
     // console.log(request.params);
+    // console.log("delete user id-----------------------------------------------", request.user.id);
     db.User.destroy({
-      where: { id: request.params.id },
+      where: { id: request.user.id },
     })
       .then((result) => {
         response.json({ id: result });

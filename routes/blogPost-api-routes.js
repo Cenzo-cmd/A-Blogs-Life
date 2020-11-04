@@ -15,7 +15,7 @@ module.exports = (app) => {
       body,
       UserId: request.user.id,
     };
-    console.log(request.user.id);
+    // console.log(request.user.id);
     db.BlogPost.create(newPost)
       .then((result) => {
         // response.send(`blog named ${title} with a body ${body} created`);
@@ -76,7 +76,7 @@ module.exports = (app) => {
   ////////// U - Update - Change title or content of post?
   // Flexibly update a post, passing in the updated key:value pairing in the request body
   app.put("/api/BlogPosts", (request, response) => {
-    console.log("request.body.blogPost_id", request.body.blogPost_id);
+    // console.log("request.body.blogPost_id", request.body.blogPost_id);
     db.BlogPost.update(request.body, {
       where: {
         id: request.body.blogPost_id,
