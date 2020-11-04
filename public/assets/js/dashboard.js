@@ -4,9 +4,18 @@ $(document).ready(() => {
 
   document.title = "It's a Blog's Life";
 
-  M.Modal.init(document.querySelectorAll(".modal"));
-  $(".modal").modal();
+
   M.updateTextFields();
+  $(".modal").modal({
+    dismissible: false, // Modal cannot be closed by clicking anywhere outside
+  });
+
+  // reload page if exiting post edit modal
+  $(".close-modal-button").click(() => {
+    console.log("closing without saving!");
+    window.location.reload();
+  });
+
 
   // //event listener for "submit post edits" buttons
   $(document).on("submit", ".update-blogPost-form", (event) => {
@@ -20,7 +29,9 @@ $(document).ready(() => {
       // eslint-disable-next-line camelcase
       blogPost_id: blogId,
     };
+
     // console.log("updateQuery", updateQuery);
+
 
     $.ajax("/api/blogposts", { method: "PUT", data: updateQuery }).then(() => {
       window.location.reload();

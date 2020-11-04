@@ -82,7 +82,20 @@ module.exports = (app) => {
     db.User.findOne({
       where: { id: request.params.id },
       //TODO: Make sure this works AAS
-      include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
+      include: [
+        { 
+          model: db.BlogPost, 
+          include: [db.Like, db.Comment] 
+        },
+        {
+          model: db.User,
+          as: "following",
+        },
+        {
+          model: db.User,
+          as: "follower",
+        }
+      ],
     }).then((dbUser) => {
       response.json(dbUser);
     });
@@ -109,9 +122,11 @@ module.exports = (app) => {
     // }
   );
 
+
   ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
   // delete user
   app.delete("/profile/", isAuthenticated, (request, response) => {
+
     // console.log(request.params);
     // console.log("delete user id-----------------------------------------------", request.user.id);
     db.User.destroy({
@@ -125,7 +140,7 @@ module.exports = (app) => {
       });
   });
 
-  //logout
+  // logout
   app.get("/logout", (request, response) => {
     request.logout();
     response.redirect("/");

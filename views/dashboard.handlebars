@@ -94,8 +94,18 @@
                                                 Post
                                                 <i class="material-icons right">send</i>
                                             </button>
+
+
                                         </div>
+
                                     </form>
+                                    <div class="row center">
+                                        <button id="close-modal-button-{{this.dataValues.id}}"
+                                            class=" align-center close-modal-button btn waves-effect waves-light">Close
+                                            without Saving
+                                            <i class="material-icons right">delete</i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,11 +119,13 @@
                 <div class="row" id="following-user-{{this.dataValues.id}}">
                     {{this.dataValues.username}}'s Posts
                     {{#each this.dataValues.BlogPosts}}
+
                     <div class="card col s12" id="blogpost-{{this.dataValues.id}}">
                         <div class="card-content">
                             <span class="card-title">{{this.dataValues.title}}</span>
                             <p>{{this.dataValues.body}}</p>
                             <p>This should be blogpost {{this.dataValues.id}}</p>
+
                         </div>
                     </div>
                     {{/each}}
