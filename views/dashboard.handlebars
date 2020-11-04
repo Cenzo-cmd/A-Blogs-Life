@@ -1,8 +1,7 @@
 <nav>
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">{{this.result.dataValues.firstName}}'s Dashboard</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
-                class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li class="goto-dashboard"><a href="/dashboard">Dashboard</a></li>
             <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
@@ -65,14 +64,13 @@
                     <div class="col m2" style="padding-top: 3rem; padding-left: 1rem">
 
                         <a id="testTrigger" data-postID="{{this.dataValues.id}}"
-                            data-target="modal{{this.dataValues.id}}"
-                            class="waves-effect waves-light btn modal-trigger"
+                            data-target="modal{{this.dataValues.id}}" class="waves-effect waves-light btn modal-trigger"
                             href="#modal{{this.dataValues.id}}">Edit Post</a>
 
                         <button style="margin-top:3rem" id="delete-post-{{this.dataValues.id}}"
                             data-postID="{{this.dataValues.id}}"
                             class="waves-effect waves-light btn delete-post-btn">Delete
-                            <i class="material-icons trash"></i>
+                            <i class="material-icons delete"></i>
                         </button>
 
                         <div id="modal{{this.dataValues.id}}" class="modal">
@@ -80,20 +78,16 @@
 
                                 <form class="update-blogPost-form" data-id={{this.dataValues.id}}>
 
-                                    <input value="{{this.dataValues.title}}"
-                                        id="title-{{this.dataValues.id}}" type="text"
-                                        class="validate">
+                                    <input value="{{this.dataValues.title}}" id="title-{{this.dataValues.id}}"
+                                        type="text" class="validate">
                                     <label class="active" for="title">title</label>
 
-                                    <input value="{{this.dataValues.body}}"
-                                        id="body-{{this.dataValues.id}}" type="text"
+                                    <input value="{{this.dataValues.body}}" id="body-{{this.dataValues.id}}" type="text"
                                         class="validate">
                                     <label class="active" for="body">body</label>
                                     <br>
-                                    <button id="button-{{this.dataValues.id}}"
-                                        style="margin-left: 5rem"
-                                        class="btn waves-effect waves-light" type="submit"
-                                        name="action">Update Post
+                                    <button id="button-{{this.dataValues.id}}" style="margin-left: 5rem"
+                                        class="btn waves-effect waves-light" type="submit" name="action">Update Post
                                         <i class="material-icons right">send</i>
                                     </button>
 
@@ -108,10 +102,8 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <!-- Compiled and minified JavaScript -->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="/assets/js/dashboard.js"></script>

@@ -46,9 +46,13 @@ module.exports = function(sequelize, DataTypes) {
 
     User.associate = (db) => {
         User.hasMany(db.BlogPost, { onDelete: "cascade" });
+
+        User.hasMany(db.Like, { onDelete: "cascade" });
+
         User.belongsToMany(User, { as: "follower", through: db.UserFollows, foreignKey: "following_id" });
         User.belongsToMany(User, { as: "following", through: db.UserFollows, foreignKey: "follower_id"});
  };
+
 
     return User;
 };
