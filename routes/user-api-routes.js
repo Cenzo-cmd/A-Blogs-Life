@@ -44,9 +44,9 @@ module.exports = (app) => {
     db.User.findAll({
       //TODO: Make sure this works AAS
       include: [
-        { 
-          model: db.BlogPost, 
-          include: [db.Like, db.Comment] 
+        {
+          model: db.BlogPost,
+          include: [db.Like, db.Comment],
         },
         {
           model: db.User,
@@ -166,7 +166,9 @@ module.exports = (app) => {
   });
 
   app.get("/findFriends", isAuthenticated, (request, response) => {
-    db.User.findAll()
+    db.User.findAll({
+      order: [["lastName", "ASC"]],
+    })
       .then((result) => {
         const loggedInUserId = request.user.id;
         const fileteredUser = result.filter((user) => user.dataValues.id !== loggedInUserId);
