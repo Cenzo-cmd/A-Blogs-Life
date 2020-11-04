@@ -82,7 +82,20 @@ module.exports = (app) => {
     db.User.findOne({
       where: { id: request.params.id },
       //TODO: Make sure this works AAS
-      include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
+      include: [
+        { 
+          model: db.BlogPost, 
+          include: [db.Like, db.Comment] 
+        },
+        {
+          model: db.User,
+          as: "following",
+        },
+        {
+          model: db.User,
+          as: "follower",
+        }
+      ],
     }).then((dbUser) => {
       response.json(dbUser);
     });
@@ -109,8 +122,7 @@ module.exports = (app) => {
     // }
   );
 
-  ////////// D - Delete (Destroy) - Delete one or all Users ( TODO: Probably not all?)
-  // delete user
+  ////////// D - Delete (Destroy) - Delete one user
   app.delete("/profile/:id", (request, response) => {
     // console.log(request.params);
     db.User.destroy({
@@ -124,7 +136,7 @@ module.exports = (app) => {
       });
   });
 
-  //logout
+  // logout
   app.get("/logout", (request, response) => {
     request.logout();
     response.redirect("/");
@@ -151,8 +163,8 @@ module.exports = (app) => {
       .then((result) => {
         const blogPosts = result.dataValues.BlogPosts;
 
-        console.log("#####################result.dataValues", result.dataValues);
-        console.log("&&&&&&&&&&&&&&&result.dataValues.Comments[0].dataValues", result.dataValues.BlogPosts[0].dataValues);
+        // console.log("#####################result.dataValues", result.dataValues);
+        // console.log("&&&&&&&&&&&&&&&result.dataValues.Comments[0].dataValues", result.dataValues.BlogPosts[0].dataValues);
         const userInfo = {
           result,
           blogs: blogPosts,
