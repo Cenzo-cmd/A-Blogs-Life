@@ -8,9 +8,9 @@ $(document).ready(() => {
   generatePosts();
 
   function generatePosts() {
-    console.log("Trying to generate posts!");
+    // console.log("Trying to generate posts!");
 
     const url = window.location.search;
-    console.log(url);
+    // console.log(url);
   }
 });

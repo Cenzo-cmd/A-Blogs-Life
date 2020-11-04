@@ -1,25 +1,24 @@
 $(document).ready(() => {
-    //  This is the add friend button
-    $(".addFriend").on("click", function(event) {
-        event.preventDefault();
-        const followId = $(this).data("value");
-        
-        // TODO: add this friend to currentUser following array
-        $.ajax("/addFriend/" + followId, {
-            method: "POST"
-        }).then((result) => {
-            console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
-            // TODO: Disable button once following
-        });
+  //  This is the add friend button
+  $(".addFriend").on("click", function (event) {
+    event.preventDefault();
+    const followId = $(this).data("value");
+
+    // TODO: add this friend to currentUser following array
+    $.ajax("/addFriend/" + followId, {
+      method: "POST",
+    }).then((result) => {
+      // console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
+      // TODO: Disable button once following
     });
+  });
 
-    // This is the view profile button
-    //DO NOT CHAGE TO ARROW FUNCTION!!!  Using this
-    $(".viewProfile").on("click", function(event) {
-        event.preventDefault();
-        const userId = $(this).data("value");
+  // This is the view profile button
+  //DO NOT CHAGE TO ARROW FUNCTION!!!  Using this
+  $(".viewProfile").on("click", function (event) {
+    event.preventDefault();
+    const userId = $(this).data("value");
 
-        window.location.replace("/dashboard/" + userId);
-    });
-
+    window.location.replace("/dashboard/" + userId);
+  });
 });
