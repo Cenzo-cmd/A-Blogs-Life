@@ -44,7 +44,10 @@ module.exports = (app) => {
     db.User.findAll({
       //TODO: Make sure this works AAS
       include: [
-        db.BlogPost,
+        { 
+          model: db.BlogPost, 
+          include: [db.Like, db.Comment] 
+        },
         {
           model: db.User,
           as: "following",
@@ -79,7 +82,7 @@ module.exports = (app) => {
     db.User.findOne({
       where: { id: request.params.id },
       //TODO: Make sure this works AAS
-      include: [db.BlogPost],
+      include: [{ model: db.BlogPost, include: [db.Like, db.Comment] }],
     }).then((dbUser) => {
       response.json(dbUser);
     });
@@ -189,7 +192,9 @@ module.exports = (app) => {
 
   app.post("/addFriend/:id", isAuthenticated, (request, response) => {
     const newFollow = {
+      // eslint-disable-next-line camelcase
       following_id: request.params.id,
+      // eslint-disable-next-line camelcase
       follower_id: request.user.id,
     };
 
