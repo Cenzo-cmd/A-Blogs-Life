@@ -47,6 +47,23 @@
                     <div class="card-action">
                         <a href="/dashboard/updateProfile">Edit Profile</a>
                     </div>
+                    <div class="card-action">
+                        <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light btn modal-trigger" href="#delete-user-modal">DELETE USER</a>
+                        <!-- Modal Structure -->
+                        <div id="delete-user-modal" class="modal">
+                            <div class="modal-content">
+                                <h4> Are you sure you want to delete this user? This will also delete all your posts,
+                                    comments, and likes.</h4>
+                                <h5> This action cannot be undone!</h5>
+                                <a id="delete-user-btn" class="waves-effect waves-light btn" href="#"> Yes I'm sure,
+                                    delete this user.</a>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

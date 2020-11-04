@@ -15,6 +15,15 @@ $(document).ready(() => {
     window.location.reload();
   });
 
+  //event listener for DELETE USER button
+  $("#delete-user-btn").click((event) => {
+    console.log("i clicked the delete user button");
+
+    $.ajax("/profile/", { method: "DELETE" }).then(() => {
+      window.location.replace("/");
+    });
+  });
+
   // //event listener for "submit post edits" buttons
   $(document).on("submit", ".update-blogPost-form", (event) => {
     event.preventDefault();
