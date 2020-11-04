@@ -50,9 +50,10 @@
                 </div>
             </div>
 
-            <h4>Your Blog Posts:</h4>
+            
             {{!-- The place where blog posts live --}}
-            <section id="blog-posts" class="col s12">
+            <section id="blog-posts" class="col s12 m6">
+                <h4>Your Blog Posts:</h4>
                 {{#each blogs}}
                 <div class="row" id="blog-post-{{this.dataValues.id}}">
                     <div class="card blue-grey darken-1 col s12 m9">
@@ -98,6 +99,23 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                {{/each}}
+            </section>
+            <section id="other-posts" class="col s12 m6">
+                <h4>Following:</h4>
+                {{#each following}}
+                <div class="row" id="following-user-{{this.dataValues.id}}">
+                    {{this.dataValues.username}}'s Posts
+                    {{#each this.dataValues.BlogPosts}}
+                        <div class="card col s12" id="blogpost-{{this.dataValues.id}}">
+                            <div class="card-content">
+                                <span class="card-title">{{this.dataValues.title}}</span>
+                                <p>{{this.dataValues.body}}</p>
+                                <p>This should be blogpost {{this.dataValues.id}}</p>
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
                 {{/each}}
             </section>

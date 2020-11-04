@@ -15,7 +15,7 @@ $(document).ready(() => {
     password = password.val().trim();
     event.preventDefault();
 
-    console.log(email, password);
+    // console.log(email, password);
 
     $.post("/api/login", {
       email: email,

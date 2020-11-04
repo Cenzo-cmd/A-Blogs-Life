@@ -3,13 +3,13 @@ $(document).ready(() => {
     $(".addFriend").on("click", function(event) {
         event.preventDefault();
         const followId = $(this).data("value");
-        console.log("Current user id: ", localStorage.getItem("id"));
         
         // TODO: add this friend to currentUser following array
         $.ajax("/addFriend/" + followId, {
             method: "POST"
         }).then((result) => {
-            console.log("Current user now follows: " + followId);
+            console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
+            // TODO: Disable button once following
         });
     });
 
