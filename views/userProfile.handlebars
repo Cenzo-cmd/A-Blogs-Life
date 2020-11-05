@@ -1,6 +1,6 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo center">Find Friends</a>
+        <a href="#!" class="brand-logo center">{{this.result.datavalues.username}}</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li class="goto-dashboard"><a href="/dashboard">Dashboard</a></li>
@@ -25,22 +25,24 @@
 
 <div style="margin-bottom:3rem" class="col s12 m12">
     <div class="card">
+        <div class="card-content">
+        <h3>{{this.result.dataValues.firstName}} {{this.result.dataValues.lastName}}'s Profile!</h3>
+        </div>
     </div>
-</div>
-<div class="card-content">
-    <h3>{{this.result.dataValues.firstName}} {{this.result.dataValues.lastName}}'s Profile!</h3>
 </div>
 {{#each blogs}}
 <div class="container">
     <div class="row">
-        <div class="card blue-grey darken-1 col m10">
+        <div class="card blue-grey darken-1 col s12">
             <div class="card-content white-text">
                 <span class="card-title">{{this.dataValues.title}}</span>
                 <br>
                 <p>{{this.dataValues.body}} </p>
                 <br>
-                <p>Created: {{this.dataValues.createdAt}}</p>
+                <div class="divider"></div>
                 <br>
+                <span><a href="/dashboard/{{this.dataValues.id}}">{{this.dataValues.username}}</a> posted at {{this.dataValues.createdAt}}</span>
+                <br><br>
                 <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
                     class="btn waves-effect waves-light likeButton" type="submit" name="action">Like
                     <i class="material-icons right">thumb_up</i> {{this.dataValues.Likes.length}}
@@ -49,13 +51,11 @@
                     class="btn waves-effect waves-light commentButton" type="submit" name="action">Comment
                     <i class="material-icons right">comment</i>
                 </button>
-
-
                 </section>
             </div>
 
 
-
+            {{!--
             <div class="appendCommentSection{{this.dataValues.id}}">
 
             </div>
@@ -67,9 +67,20 @@
                 <p>{{this.dataValues.commentBody}}</p>
                 {{/each}}
             </div>
-
+            --}}
 
         </div>
+        <div class="col s12">
+                <span class="header">Comments:</h4>
+                {{#each this.dataValues.Comments}}
+                    <div class="card-panel">
+                        <span>{{this.dataValues.commentBody}}</span>
+                    </div>
+                    <br>
+                    <div class="divider"></div>
+                    <br>
+                {{/each}}
+            </div>
     </div>
 </div>
 
