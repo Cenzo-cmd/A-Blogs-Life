@@ -60,11 +60,11 @@
 
             </div>
 
-            <div class="rendered-comments-section">
+            <div class="rendered-comments-section white-text">
 
                 {{#each this.dataValues.Comments}}
-                <h1>{{this.dataValues.userId}} says:</h1>
-                <p>{{this.dataValues.commentBody}}</p>
+                {{!-- <h1>{{this.dataValues.userId}} says:</h1> --}}
+                <h5>{{this.dataValues.commentBody}}</h5>
                 {{/each}}
             </div>
 
