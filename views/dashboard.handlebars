@@ -119,20 +119,22 @@
                 <h4>Following:</h4>
                 {{#each following}}
                 <div class="row" id="following-user-{{this.dataValues.id}}">
-                    {{this.dataValues.username}}'s Posts
                     {{#each this.dataValues.BlogPosts}}
 
                     <div class="card col s12" id="blogpost-{{this.dataValues.id}}">
                         <div class="card-content">
                             <span class="card-title">{{this.dataValues.title}}</span>
                             <p>{{this.dataValues.body}}</p>
-                            <p>This should be blogpost {{this.dataValues.id}}</p>
-
+                            <br>
+                            <div class="divider"></div>
+                            <br>
+                            <span><a href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a> posted at {{this.dataValues.createdAt}}</span>
                         </div>
                     </div>
                     {{/each}}
                 </div>
                 {{/each}}
+                <div class="divider"></div>
             </section>
         </div>
     </div>
