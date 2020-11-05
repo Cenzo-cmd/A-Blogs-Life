@@ -5,12 +5,12 @@ $(document).ready(() => {
   // const blogpostEl = $("#blogposts");
   // let posts;
 
-  generatePosts();
+  // generatePosts();
 
-  function generatePosts() {
-    // console.log("Trying to generate posts!");
+  // function generatePosts() {
+  //   // console.log("Trying to generate posts!");
 
-    const url = window.location.search;
-    // console.log(url);
-  }
+  //   const url = window.location.search;
+  //   // console.log(url);
+  // }
 });
