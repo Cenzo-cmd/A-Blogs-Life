@@ -51,7 +51,7 @@
             </div>
 
             {{!-- The place where blog posts live --}}
-            <section id="blog-posts" class="col s12 m6">
+            <section id="blog-posts" class="col s12 m5">
                 <h4>Your Blog Posts:</h4>
                 {{#each blogs}}
                 <div class="row" id="blog-post-{{this.dataValues.id}}">
@@ -61,55 +61,6 @@
                             <p>{{this.dataValues.body}}</p>
                         </div>
                     </div>
-                    {{!-- <div class="col s12 m3" style="margin-top: 7.5px;"> --}}
-                    {{!-- <div class="row">
-                            <a id="testTrigger" data-postID="{{this.dataValues.id}}"
-                                data-target="modal{{this.dataValues.id}}"
-                                class="col s8 offset-s2 waves-effect waves-light btn modal-trigger"
-                                href="#modal{{this.dataValues.id}}">Edit <i class="material-icons">edit</i></a>
-
-                            <button style="margin-top:1.5rem" id="delete-post-{{this.dataValues.id}}"
-                                data-postID="{{this.dataValues.id}}"
-                                class="col s8 offset-s2 waves-effect waves-light btn delete-post-btn">Delete
-                                <i class="material-icons ">delete</i>
-                            </button>
-
-                            <div id="modal{{this.dataValues.id}}" class="modal">
-                                <div class="modal-content">
-
-                                    <form class="update-blogPost-form" data-id={{this.dataValues.id}}>
-
-                                        <label class="active" for="title">title</label>
-                                        <input value="{{this.dataValues.title}}" id="title-{{this.dataValues.id}}"
-                                            type="text" class="validate">
-
-                                        <label class="active" for="body">body</label>
-                                        <input value="{{this.dataValues.body}}" id="body-{{this.dataValues.id}}"
-                                            type="text" class="validate">
-                                        <br>
-                                        <br>
-                                        <div class="row center">
-                                            <button id="button-{{this.dataValues.id}}"
-                                                class="btn waves-effect waves-light" type="submit" name="action">Update
-                                                Post
-                                                <i class="material-icons right">send</i>
-                                            </button>
-
-
-                                        </div>
-
-                                    </form>
-                                    <div class="row center">
-                                        <button id="close-modal-button-{{this.dataValues.id}}"
-                                            class=" align-center close-modal-button btn waves-effect waves-light">Close
-                                            without Saving
-                                            <i class="material-icons right">delete</i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
                 {{!-- Edit/Delete Buttons live below each blogpost --}}
                 <div class="row">
@@ -160,7 +111,11 @@
                 </div>
                 {{/each}}
             </section>
-             <section id="other-posts" class="col s12 m6">
+            {{!-- empty columns for spacing --}}
+            <section class="col m2 hide-on-small-only">
+            </section>
+            {{!-- the place where following posts live --}}
+            <section id="other-posts" class="col s12 m5">
                 <h4>Following:</h4>
                 {{#each following}}
                 <div class="row" id="following-user-{{this.dataValues.id}}">
