@@ -9,8 +9,7 @@ $(document).ready(() => {
 
   function generatePosts() {
     // console.log("Trying to generate posts!");
-
-    const url = window.location.search;
+    // const url = window.location.search;
     // console.log(url);
   }
 });
