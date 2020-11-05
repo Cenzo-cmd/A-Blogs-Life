@@ -29,7 +29,7 @@
                 <span class="card-title"></span>
                 <img src="http:{{this.dataValues.avatar}}" width="75px" alt="" class="circle responsive-img"></img>
                 <h4>{{this.dataValues.firstName}} {{this.dataValues.lastName}}</h4>
-                <p>Username: {{this.dataValues.username}}</p>
+                <p>View Profile: <a href="/dashboard/{{this.dataValues.id}}">{{this.dataValues.username}}</a></p>
                 <br>
                 <div class="row" style="display: flex; justify-content: space-evenly;">
                     <button id="add-{{this.dataValues.id}}" data-value="{{this.dataValues.id}}"

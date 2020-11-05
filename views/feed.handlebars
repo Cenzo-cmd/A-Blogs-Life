@@ -30,23 +30,23 @@
                 <div class="card horizontal">
                     <div class="card-image">
                         <img src="http:{{this.dataValues.User.dataValues.avatar}}" alt="" class="circle response-img">
-                        <span>{{this.dataValues.User.dataValues.username}}</span>
-                    </div>
+                        <span><a href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a></span>
+                   </div>
                     <div class="card-content">
                         <span class="card-title">{{this.dataValues.title}}</span>
                         <p>{{this.dataValues.body}}</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row" id="comments">
             <div class="col s12">
-                <h4 class="header">Comments:</h4>
+                <span class="header">Comments:</h4>
                 {{#each this.dataValues.Comments}}
                     <div class="card-panel">
                         <span>{{this.dataValues.commentBody}}</span>
                     </div>
+                    <br>
                     <div class="divider"></div>
+                    <br>
                 {{/each}}
             </div>
         </div>
