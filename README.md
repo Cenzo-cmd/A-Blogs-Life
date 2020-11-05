@@ -84,14 +84,7 @@ You can even "Follow" another user to show their posts on your feed!
 
 ## Examples
 
-placeholders
-![Screenshot of deployed app](./app-screenshot.png)
-
-![Screenshot of deployed app](./app-screenshot.png)
-
-![Screenshot of deployed app](./app-screenshot.png)
-
-![Screenshot of deployed app](./app-screenshot.png)
+Screenshots to come!
 
 ---
 
