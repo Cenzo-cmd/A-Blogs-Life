@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  $(".sidenav").sidenav(); // Materialize functionality for sidenav
   //Do NOT change to arrow functions!
   $(".likeButton").on("click", function (event) {
     event.preventDefault();

@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  $(".sidenav").sidenav(); // Materialize functionality for sidenav
   //  This is the add friend button
   $(".addFriend").on("click", function (event) {
     event.preventDefault();
@@ -7,8 +8,9 @@ $(document).ready(() => {
     // TODO: add this friend to currentUser following array
     $.ajax("/addFriend/" + followId, {
       method: "POST",
+      // eslint-disable-next-line no-unused-vars
     }).then((result) => {
-      console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
+      // console.log("Current user with id of " + result.follower_id + " now follows: " + result.following_id);
       // TODO: Disable button once following
     });
   });
