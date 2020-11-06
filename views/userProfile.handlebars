@@ -26,7 +26,7 @@
 <div style="margin-bottom:3rem" class="col s12 m12">
     <div class="card">
         <div class="card-content">
-        <h3>{{this.result.dataValues.firstName}} {{this.result.dataValues.lastName}}'s Profile!</h3>
+            <h3>{{this.result.dataValues.firstName}} {{this.result.dataValues.lastName}}'s Profile!</h3>
         </div>
     </div>
 </div>
@@ -41,7 +41,8 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <span><a href="/dashboard/{{this.dataValues.id}}">{{this.dataValues.username}}</a> posted at {{this.dataValues.createdAt}}</span>
+                <span><a href="/dashboard/{{this.dataValues.id}}">{{this.dataValues.username}}</a> posted at
+                    {{this.dataValues.createdAt}}</span>
                 <br><br>
                 <button data-value="{{this.dataValues.id}}" style="margin-left: 5rem"
                     class="btn waves-effect waves-light likeButton" type="submit" name="action">Like
@@ -54,33 +55,23 @@
                 </section>
             </div>
 
-
-            {{!--
             <div class="appendCommentSection{{this.dataValues.id}}">
-
             </div>
-
             <div class="rendered-comments-section white-text">
-
-                {{#each this.dataValues.Comments}}
-                {{!-- <h1>{{this.dataValues.userId}} says:</h1> --}}
-                <h5>{{this.dataValues.commentBody}}</h5>
-                {{/each}}
             </div>
-            --}}
 
         </div>
         <div class="col s12">
-                <span class="header">Comments:</h4>
+            <span class="header">Comments:</h4>
                 {{#each this.dataValues.Comments}}
-                    <div class="card-panel">
-                        <span>{{this.dataValues.commentBody}}</span>
-                    </div>
-                    <br>
-                    <div class="divider"></div>
-                    <br>
+                <div class="card-panel">
+                    <span>{{this.dataValues.commentBody}}</span>
+                </div>
+                <br>
+                <div class="divider"></div>
+                <br>
                 {{/each}}
-            </div>
+        </div>
     </div>
 </div>
 
