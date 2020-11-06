@@ -14,6 +14,7 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
+    <li class="dashboard"><a href="/dashboard/">Dashboard</a></li>
     <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
     <li><a href="/feed">All Posts</a></li>
     <li><a href="/findFriends">Find Friends</a></li>
@@ -30,8 +31,9 @@
                 <div class="card horizontal">
                     <div class="card-image">
                         <img src="http:{{this.dataValues.User.dataValues.avatar}}" alt="" class="circle response-img">
-                        <span><a href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a></span>
-                   </div>
+                        <span><a
+                                href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a></span>
+                    </div>
                     <div class="card-content">
                         <span class="card-title">{{this.dataValues.title}}</span>
                         <p>{{this.dataValues.body}}</p>
@@ -40,14 +42,14 @@
             </div>
             <div class="col s12">
                 <span class="header">Comments:</h4>
-                {{#each this.dataValues.Comments}}
+                    {{#each this.dataValues.Comments}}
                     <div class="card-panel">
                         <span>{{this.dataValues.commentBody}}</span>
                     </div>
                     <br>
                     <div class="divider"></div>
                     <br>
-                {{/each}}
+                    {{/each}}
             </div>
         </div>
     </div>
