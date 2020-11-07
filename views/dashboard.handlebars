@@ -14,6 +14,7 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
+    <li class="dashboard"><a href="/dashboard/">Dashboard</a></li>
     <li class="new-post"><a href="/dashboard/newPost">New Post</a></li>
     <li><a href="/feed">All Posts</a></li>
     <li><a href="/findFriends">Find Friends</a></li>
@@ -128,7 +129,9 @@
                             <br>
                             <div class="divider"></div>
                             <br>
-                            <span><a href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a> posted at {{this.dataValues.createdAt}}</span>
+                            <span><a
+                                    href="/dashboard/{{this.dataValues.User.dataValues.id}}">{{this.dataValues.User.dataValues.username}}</a>
+                                posted at {{this.dataValues.createdAt}}</span>
                         </div>
                     </div>
                     {{/each}}
